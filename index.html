@@ -1,0 +1,2172 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CEPIMA — Página animada</title>
+<style>
+:root{
+  --bg:#f5f8fb;--ink:#0a2036;--muted:#617489;
+  --green:#27c878;--blue:#1385d8;--dark:#071827;
+  --ease:cubic-bezier(.22,.8,.22,1)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+a{color:inherit}
+button{font:inherit}
+
+/* ===== HERO: banner intacto ===== */
+.hero{
+  min-height:100vh;
+  position:relative;
+  background:url("assets/cepima-image-1.png") center/cover no-repeat;
+  overflow:hidden;
+}
+.hero::after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(5,18,28,.03),rgba(5,18,28,.10));
+  pointer-events:none;
+}
+
+/* ===== HAMBURGER REAL ===== */
+.menu-btn{
+  position:fixed;top:28px;right:32px;
+  width:58px;height:58px;
+  border:0;border-radius:50%;
+  background:rgba(6,22,34,.16);
+  backdrop-filter:blur(12px);
+  cursor:pointer;
+  z-index:100;
+  transition:transform .25s var(--ease),background .25s;
+}
+.menu-btn:hover{transform:scale(1.06);background:rgba(6,22,34,.24)}
+.menu-btn span{
+  display:block;
+  width:28px;height:2px;
+  margin:6px auto;
+  background:#fff;
+  transition:transform .35s ease,opacity .25s ease;
+}
+.menu-btn.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.menu-btn.open span:nth-child(2){opacity:0}
+.menu-btn.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+.menu-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.28);
+  opacity:0;pointer-events:none;
+  transition:opacity .35s ease;
+  z-index:80;
+}
+.menu-overlay.open{opacity:1;pointer-events:auto}
+
+.menu-panel{
+  position:fixed;top:0;right:0;
+  width:min(420px,88vw);
+  height:100vh;
+  padding:120px 48px 50px;
+  background:rgba(7,24,39,.97);
+  backdrop-filter:blur(18px);
+  transform:translateX(100%);
+  transition:transform .45s var(--ease);
+  z-index:90;
+}
+.menu-panel.open{transform:translateX(0)}
+.menu-panel a{
+  display:block;
+  text-decoration:none;
+  color:#fff;
+  font-size:28px;
+  margin-bottom:22px;
+  opacity:.9;
+  transform:translateX(20px);
+  transition:transform .28s var(--ease),opacity .28s;
+}
+.menu-panel.open a{transform:translateX(0)}
+.menu-panel a:hover{transform:translateX(10px);opacity:1}
+
+/* ===== GENERAL ===== */
+.section{position:relative;overflow:hidden}
+.wrap{max-width:1280px;margin:auto;padding:115px 6vw}
+.label{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:#4f6f86}
+h2{font-size:clamp(44px,6vw,82px);line-height:.98;letter-spacing:-.055em;margin:14px 0 22px}
+.lead{max-width:760px;font-size:clamp(18px,2vw,26px);line-height:1.55;color:var(--muted)}
+.reveal{opacity:0;transform:translateY(55px) scale(.98);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.show{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-70px);transition:opacity .95s var(--ease),transform .95s var(--ease)}
+.reveal-right{opacity:0;transform:translateX(70px);transition:opacity .95s var(--ease),transform .95s var(--ease)}
+.reveal-left.show,.reveal-right.show{opacity:1;transform:none}
+
+/* ===== SOBRE NOSOTROS ===== */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:52px}
+.stat{border-top:1px solid #c9d5df;padding-top:18px;transition:transform .25s var(--ease),border-color .25s}
+.stat:hover{transform:translateY(-6px);border-color:var(--green)}
+.stat strong{display:block;font-size:44px}
+.stat span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+.stage{min-height:640px;position:relative;perspective:1100px;transform-style:preserve-3d}
+.stage-bg{
+  position:absolute;inset:8%;border-radius:44px;
+  background:radial-gradient(circle at 50% 45%,rgba(28,181,203,.17),rgba(255,255,255,.55) 50%,rgba(255,255,255,.22));
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 35px 95px rgba(25,67,89,.11);
+  transform:translateZ(-50px);
+}
+.aura{
+  position:absolute;left:50%;top:50%;width:500px;height:500px;
+  transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(40,200,117,.22),rgba(21,133,216,.08) 42%,transparent 67%);
+  filter:blur(10px);animation:auraPulse 5s ease-in-out infinite;
+}
+@keyframes auraPulse{
+  0%,100%{transform:translate(-50%,-50%) scale(.95)}
+  50%{transform:translate(-50%,-50%) scale(1.08)}
+}
+.globe{
+  position:absolute;left:50%;top:50%;width:min(34vw,400px);aspect-ratio:1;
+  transform:translate(-50%,-50%);border-radius:50%;
+  background:
+    radial-gradient(circle at 33% 28%,rgba(255,255,255,.95),transparent 11%),
+    radial-gradient(circle at 47% 45%,#78d8b3 0 18%,#32a9d5 19% 49%,#0f4f8c 50% 100%);
+  box-shadow:0 45px 90px rgba(12,72,111,.22),inset -36px -26px 55px rgba(0,0,0,.18);
+  transition:transform .12s ease-out,box-shadow .12s ease-out;
+  transform-style:preserve-3d;
+  animation:globeFloat 6s ease-in-out infinite;
+}
+@keyframes globeFloat{
+  0%,100%{margin-top:0}
+  50%{margin-top:-14px}
+}
+.orbit{
+  position:absolute;left:50%;top:50%;width:540px;height:210px;
+  transform:translate(-50%,-50%) rotateX(66deg) rotateZ(-10deg);
+  border:1px solid rgba(18,134,216,.24);border-radius:50%;
+  transition:transform .12s ease-out;
+}
+.orbit-dot{
+  position:absolute;width:12px;height:12px;border-radius:50%;
+  background:linear-gradient(135deg,#7bf1ad,#34a5e6);
+  box-shadow:0 0 20px rgba(52,165,230,.45);z-index:5;
+}
+.float-card{
+  position:absolute;width:200px;padding:18px;border-radius:20px;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 24px 60px rgba(30,70,92,.12);
+  transform-style:preserve-3d;
+  transition:transform .12s ease-out,box-shadow .2s ease;
+  z-index:8;
+}
+.float-card b{display:block;margin-bottom:7px;font-size:17px}
+.float-card small{display:block;color:var(--muted);line-height:1.4}
+.c1{left:0;top:14%}
+.c2{right:0;top:18%}
+.c3{left:4%;bottom:11%}
+.c4{right:1%;bottom:9%}
+
+/* ===== INVESTIGACIÓN ===== */
+.research{background:var(--dark);color:#fff}
+.research::before{
+  content:"";position:absolute;width:760px;height:760px;border-radius:50%;
+  right:-240px;top:-240px;
+  background:radial-gradient(circle,rgba(40,200,117,.15),transparent 66%);
+  animation:slowSpin 18s linear infinite;
+}
+@keyframes slowSpin{to{transform:rotate(360deg)}}
+.research .label,.research .lead{color:#aab9c7}
+.research-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:62px}
+.tilt-card{
+  min-height:330px;position:relative;padding:34px;border-radius:30px;
+  overflow:hidden;transform-style:preserve-3d;
+  transition:transform .12s ease-out,box-shadow .15s ease;
+}
+.research-card{
+  background:linear-gradient(145deg,rgba(255,255,255,.085),rgba(255,255,255,.024));
+  border:1px solid rgba(255,255,255,.11);
+}
+.num{font-size:12px;letter-spacing:.22em;color:#7ce2aa}
+.tilt-card h3{font-size:clamp(29px,2.6vw,42px);line-height:1.04;margin:20px 0 14px;max-width:520px}
+.tilt-card p{color:#b8c5d0;line-height:1.55;max-width:540px}
+.orb{
+  position:absolute;right:-34px;bottom:-46px;width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#bff3d1,#2faad2 48%,#0b4f8a 76%);
+  opacity:.73;transition:transform .12s ease-out;
+}
+
+/* ===== PROYECTOS ===== */
+.projects{background:#edf3f7}
+.project-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px}
+.project-card{
+  min-height:390px;background:#fff;
+  box-shadow:0 18px 55px rgba(22,61,82,.08);
+}
+.tag{
+  display:inline-block;padding:8px 12px;border-radius:30px;
+  background:#e8f7ef;color:#197e4c;font-size:12px;font-weight:700;
+}
+.project-card p{color:var(--muted)}
+
+/* ===== CIERRE ===== */
+.closing{
+  min-height:80vh;display:flex;align-items:center;justify-content:center;
+  background:#fff;position:relative;
+}
+.closing h3{
+  max-width:980px;padding:0 6vw;text-align:center;
+  font-size:clamp(44px,5.6vw,82px);line-height:1;letter-spacing:-.05em;
+  position:relative;z-index:2;
+}
+.ring{position:absolute;border:1px solid rgba(21,133,216,.16);border-radius:50%}
+.r1{width:520px;height:520px;animation:ring1 14s linear infinite}
+.r2{width:740px;height:250px;border-color:rgba(40,200,117,.16);animation:ring2 18s linear infinite reverse}
+.r3{width:330px;height:330px;animation:ring3 11s linear infinite}
+@keyframes ring1{to{transform:rotate(360deg) scale(1.05)}}
+@keyframes ring2{to{transform:rotateX(65deg) rotateZ(360deg)}}
+@keyframes ring3{to{transform:rotateY(360deg) scale(.92)}}
+
+@media(max-width:960px){
+  .about-grid{grid-template-columns:1fr}
+  .research-grid{grid-template-columns:1fr}
+  .project-grid{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stage{min-height:560px}
+  .globe{width:320px}
+  .orbit{width:430px}
+}
+@media(max-width:620px){
+  .hero{min-height:72vh;background-position:center top}
+  .wrap{padding:80px 24px}
+  .project-grid{grid-template-columns:1fr}
+  .stage{min-height:520px}
+  .globe{width:235px}
+  .orbit{width:320px;height:150px}
+  .float-card{width:150px;padding:14px}
+}
+
+  .reveal,.reveal-left,.reveal-right{opacity:1;transform:none!important}
+}
+</style>
+
+
+
+
+<style>
+/* ===== REFINED MOTION SYSTEM =====
+   Clean, subtle and intentional: no bouncing titles, no random card movement.
+*/
+
+/* About visual: gentle life, not constant jumping */
+.aura{
+  animation:cleanAura 7s ease-in-out infinite !important;
+}
+@keyframes cleanAura{
+  0%,100%{transform:translate(-50%,-50%) scale(.98);opacity:.72}
+  50%{transform:translate(-50%,-50%) scale(1.045);opacity:.92}
+}
+
+.globe{
+  animation:cleanGlobe 7.5s ease-in-out infinite !important;
+}
+@keyframes cleanGlobe{
+  0%,100%{margin-top:0}
+  50%{margin-top:-8px}
+}
+
+/* Cards stay visually stable unless hovered */
+.float-card,
+.research-card,
+.project-card{
+  animation:none !important;
+}
+
+/* Slow scientific orbit */
+.orbit{
+  animation:none !important;
+}
+
+/* Closing rings: slow, elegant motion */
+.r1{animation:cleanRing1 22s linear infinite !important}
+.r2{animation:cleanRing2 28s linear infinite reverse !important}
+.r3{animation:cleanRing3 18s linear infinite !important}
+@keyframes cleanRing1{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+@keyframes cleanRing2{
+  from{transform:rotateX(62deg) rotateZ(0deg)}
+  to{transform:rotateX(62deg) rotateZ(360deg)}
+}
+@keyframes cleanRing3{
+  from{transform:rotateY(0deg)}
+  to{transform:rotateY(360deg)}
+}
+
+/* Prevent weird typography pulsing */
+.section h2{
+  animation:none !important;
+}
+
+/* Better hover depth */
+.tilt-card,
+.float-card{
+  transition:
+    transform .18s cubic-bezier(.22,.8,.22,1),
+    box-shadow .22s ease !important;
+}
+
+/* Subtle top progress bar */
+#scrollProgress{
+  position:fixed;
+  left:0;
+  top:0;
+  height:3px;
+  width:0;
+  z-index:9999;
+  pointer-events:none;
+  background:linear-gradient(90deg,#27c878,#1385d8);
+}
+
+/* Small active point orbiting the globe */
+.clean-orbit-dot{
+  position:absolute;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#75ecad,#2d9ee0);
+  box-shadow:0 0 18px rgba(45,158,224,.42);
+  z-index:7;
+  pointer-events:none;
+}
+</style>
+
+
+<style>
+/* ÚNICO AJUSTE: el banner ya no se desplaza ni hace parallax al hacer scroll. */
+.hero{
+  background-position:center center !important;
+  transform:none !important;
+}
+</style>
+
+
+<style>
+/* NUEVO BANNER: añadido debajo de la sección de cierre, sin reemplazar nada anterior */
+.cepima-extra-banner{
+  width:100%;
+  position:relative;
+  background:#eef6fb;
+  padding:0;
+  overflow:hidden;
+}
+.cepima-extra-banner-inner{
+  width:100%;
+  position:relative;
+  overflow:hidden;
+  perspective:1400px;
+  transform-style:preserve-3d;
+}
+.cepima-extra-banner img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  transform:scale(1.001);
+  transform-origin:center;
+  transition:transform .18s ease-out,filter .22s ease;
+  will-change:transform;
+}
+.cepima-extra-banner-inner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 65% 42%,rgba(255,255,255,.10),transparent 27%),
+    linear-gradient(90deg,transparent,rgba(255,255,255,.035),transparent);
+  opacity:.75;
+}
+@media(max-width:700px){
+  .cepima-extra-banner img{
+    min-height:420px;
+    object-fit:cover;
+    object-position:center;
+  }
+}
+</style>
+
+
+
+
+
+<style>
+/* ===== CEPIMA BANNER 3D INTERACTIVO ===== */
+.cepima-3d-stage{--cepima-banner-url:url("assets/cepima-image-2.png");}
+.cepima-3d-banner{
+  width:100%;
+  padding:0;
+  background:#eef6fb;
+  overflow:hidden;
+}
+.cepima-3d-stage{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  perspective:1600px;
+  transform-style:preserve-3d;
+  isolation:isolate;
+  background:#eef6fb;
+}
+.cepima-base-image{
+  display:block;
+  width:100%;
+  height:auto;
+  position:relative;
+  z-index:1;
+  transform:translateZ(0) scale(1.001);
+  transform-origin:center;
+  transition:transform .18s ease-out,filter .2s ease;
+  will-change:transform;
+}
+.cepima-slice{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  pointer-events:auto;
+  background-image:var(--cepima-banner-url);
+  background-size:100% 100%;
+  background-position:center;
+  background-repeat:no-repeat;
+  transform-style:preserve-3d;
+  will-change:transform,filter;
+  transition:
+    transform .16s cubic-bezier(.22,.8,.22,1),
+    filter .18s ease,
+    opacity .18s ease;
+}
+.cepima-slice:hover{
+  filter:drop-shadow(0 18px 22px rgba(20,88,128,.20)) brightness(1.025);
+}
+
+/* regiones señaladas por el usuario */
+.slice-script{
+  clip-path:polygon(31% 18%,50% 18%,50% 34%,31% 34%);
+}
+.slice-dot{
+  clip-path:circle(2.2% at 50.5% 17.5%);
+}
+.slice-icon-1{
+  clip-path:circle(5.2% at 78.7% 12%);
+}
+.slice-icon-2{
+  clip-path:circle(5.2% at 84.2% 24%);
+}
+.slice-icon-3{
+  clip-path:circle(5.2% at 79.7% 47.5%);
+}
+.slice-icon-4{
+  clip-path:circle(5.2% at 86.2% 57.5%);
+}
+.slice-btn-1{
+  clip-path:polygon(3.8% 58%,18.2% 58%,18.2% 66%,3.8% 66%);
+}
+.slice-btn-2{
+  clip-path:polygon(18.2% 58%,34.2% 58%,34.2% 66%,18.2% 66%);
+}
+.slice-stats{
+  clip-path:polygon(35% 57%,89% 57%,89% 72%,35% 72%);
+}
+
+/* órbitas adicionales, sutiles y realmente animadas */
+.cepima-orbit-layer{
+  position:absolute;
+  left:61.5%;
+  top:39%;
+  border:1px solid rgba(255,255,255,.62);
+  border-radius:50%;
+  z-index:4;
+  pointer-events:none;
+  transform-style:preserve-3d;
+  opacity:.68;
+}
+.orbit-a{
+  width:34%;
+  aspect-ratio:1;
+  animation:cepimaOrbitA 18s linear infinite;
+}
+.orbit-b{
+  width:31%;
+  height:15%;
+  animation:cepimaOrbitB 14s linear infinite reverse;
+}
+.orbit-c{
+  width:25%;
+  height:11%;
+  animation:cepimaOrbitC 11s linear infinite;
+}
+@keyframes cepimaOrbitA{
+  from{transform:translate(-50%,-50%) rotateZ(0deg) rotateX(10deg)}
+  to{transform:translate(-50%,-50%) rotateZ(360deg) rotateX(10deg)}
+}
+@keyframes cepimaOrbitB{
+  from{transform:translate(-50%,-50%) rotateX(68deg) rotateZ(0deg)}
+  to{transform:translate(-50%,-50%) rotateX(68deg) rotateZ(360deg)}
+}
+@keyframes cepimaOrbitC{
+  from{transform:translate(-50%,-50%) rotateY(66deg) rotateZ(0deg)}
+  to{transform:translate(-50%,-50%) rotateY(66deg) rotateZ(360deg)}
+}
+
+.cepima-cursor-light{
+  position:absolute;
+  width:240px;
+  height:240px;
+  margin-left:-120px;
+  margin-top:-120px;
+  border-radius:50%;
+  z-index:3;
+  pointer-events:none;
+  opacity:0;
+  background:radial-gradient(circle,rgba(92,226,169,.20),rgba(64,166,232,.07) 42%,transparent 72%);
+  filter:blur(4px);
+  transition:opacity .2s ease;
+}
+
+/* microanimaciones continuas: elegantes */
+.slice-script{animation:cepimaFloatScript 5.8s ease-in-out infinite}
+.slice-dot{animation:cepimaDotPulse 3.6s ease-in-out infinite}
+.slice-icon-1{animation:cepimaFloat1 5.4s ease-in-out infinite}
+.slice-icon-2{animation:cepimaFloat2 6.1s ease-in-out infinite}
+.slice-icon-3{animation:cepimaFloat1 6.6s ease-in-out infinite reverse}
+.slice-icon-4{animation:cepimaFloat2 5.7s ease-in-out infinite reverse}
+.slice-btn-1,.slice-btn-2{animation:cepimaBtnBreathe 5s ease-in-out infinite}
+.slice-stats{animation:cepimaStatsBreathe 6.8s ease-in-out infinite}
+
+@keyframes cepimaFloatScript{
+  0%,100%{translate:0 0}
+  50%{translate:0 -5px}
+}
+@keyframes cepimaDotPulse{
+  0%,100%{filter:brightness(1) drop-shadow(0 0 0 rgba(53,188,217,0))}
+  50%{filter:brightness(1.12) drop-shadow(0 0 12px rgba(53,188,217,.45))}
+}
+@keyframes cepimaFloat1{
+  0%,100%{translate:0 0}
+  50%{translate:0 -7px}
+}
+@keyframes cepimaFloat2{
+  0%,100%{translate:0 0}
+  50%{translate:0 6px}
+}
+@keyframes cepimaBtnBreathe{
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.035)}
+}
+@keyframes cepimaStatsBreathe{
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.025)}
+}
+
+@media(max-width:800px){
+  .cepima-3d-stage{perspective:1000px}
+  .cepima-orbit-layer{opacity:.45}
+}
+</style>
+
+
+<style>
+/* ===== AJUSTE SOLICITADO: BANNER COMPLETAMENTE QUIETO ===== */
+.cepima-3d-stage{
+  perspective:none !important;
+  transform:none !important;
+}
+.cepima-base-image{
+  transform:none !important;
+  transition:none !important;
+  filter:none !important;
+}
+
+/* Ocultar cualquier capa interactiva vieja */
+.cepima-slice,
+.cepima-cursor-light{
+  display:none !important;
+}
+
+/* Planeta: único elemento gráfico con movimiento sutil */
+.cepima-planet-slice{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  pointer-events:none;
+  background-image:var(--cepima-banner-url);
+  background-size:100% 100%;
+  background-position:center;
+  background-repeat:no-repeat;
+  clip-path:circle(18.8% at 61.3% 39.2%);
+  transform-origin:61.3% 39.2%;
+  animation:cepimaPlanetMove 12s ease-in-out infinite alternate;
+  will-change:transform;
+}
+@keyframes cepimaPlanetMove{
+  0%{transform:scale(1.000) rotate(-0.5deg)}
+  50%{transform:scale(1.012) rotate(0.5deg)}
+  100%{transform:scale(1.004) rotate(-0.2deg)}
+}
+
+/* Líneas orbitales: movimiento continuo y limpio */
+.cepima-orbit-layer{
+  z-index:5 !important;
+  pointer-events:none !important;
+  opacity:.72 !important;
+}
+.orbit-a{
+  animation:cepimaOrbitAclean 18s linear infinite !important;
+}
+.orbit-b{
+  animation:cepimaOrbitBclean 14s linear infinite reverse !important;
+}
+.orbit-c{
+  animation:cepimaOrbitCclean 11s linear infinite !important;
+}
+
+@keyframes cepimaOrbitAclean{
+  from{transform:translate(-50%,-50%) rotateZ(0deg) rotateX(10deg)}
+  to{transform:translate(-50%,-50%) rotateZ(360deg) rotateX(10deg)}
+}
+@keyframes cepimaOrbitBclean{
+  from{transform:translate(-50%,-50%) rotateX(68deg) rotateZ(0deg)}
+  to{transform:translate(-50%,-50%) rotateX(68deg) rotateZ(360deg)}
+}
+@keyframes cepimaOrbitCclean{
+  from{transform:translate(-50%,-50%) rotateY(66deg) rotateZ(0deg)}
+  to{transform:translate(-50%,-50%) rotateY(66deg) rotateZ(360deg)}
+}
+
+/* Evitar cualquier movimiento al pasar el mouse */
+.cepima-3d-stage:hover,
+.cepima-base-image:hover{
+  transform:none !important;
+}
+</style>
+
+
+<style>
+/* ==============================
+   FOOTER / CONTACT SECTION — HTML
+   ============================== */
+.cepima-footer{
+  position:relative;
+  background:#eef7fd;
+  color:#0b2440;
+  overflow:hidden;
+}
+.footer-hero{
+  position:relative;
+  min-height:520px;
+  padding:74px 6vw 64px;
+  background:
+    radial-gradient(circle at 73% 26%,rgba(68,181,231,.20),transparent 28%),
+    radial-gradient(circle at 88% 68%,rgba(49,194,116,.15),transparent 22%),
+    linear-gradient(120deg,#f8fcff 0%,#eaf6fd 58%,#dff2f7 100%);
+  overflow:hidden;
+}
+.footer-hero::before{
+  content:"";
+  position:absolute;
+  left:-8%;right:-8%;bottom:-80px;
+  height:180px;
+  background:
+    repeating-radial-gradient(ellipse at center,rgba(63,160,221,.12) 0 1px,transparent 1px 19px);
+  opacity:.35;
+  transform:rotate(-2deg);
+}
+.footer-hero-overlay{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(115deg,transparent 0 56%,rgba(255,255,255,.35) 56% 57%,transparent 57%),
+    radial-gradient(circle at 82% 25%,rgba(255,255,255,.52),transparent 16%);
+}
+.footer-hero-grid{
+  position:relative;
+  z-index:2;
+  max-width:1450px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.08fr .62fr .8fr;
+  gap:52px;
+  align-items:center;
+}
+.footer-eyebrow{
+  font-size:12px;
+  letter-spacing:.32em;
+  color:#557794;
+  margin-bottom:20px;
+}
+.footer-copy h2{
+  margin:0 0 24px;
+  font-size:clamp(54px,6vw,90px);
+  line-height:.9;
+  letter-spacing:-.06em;
+}
+.footer-copy h2 span{
+  color:#1387e0;
+}
+.footer-copy p{
+  max-width:650px;
+  color:#61768a;
+  font-size:19px;
+  line-height:1.55;
+}
+.footer-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:28px;
+}
+.footer-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:26px;
+  min-height:54px;
+  padding:0 23px;
+  border-radius:999px;
+  text-decoration:none;
+  border:1px solid #bcd1e1;
+  background:rgba(255,255,255,.72);
+  color:#102d48;
+  transition:
+    transform .22s cubic-bezier(.22,.8,.22,1),
+    box-shadow .22s ease,
+    background .22s ease;
+}
+.footer-cta:hover{
+  transform:translateY(-4px) scale(1.015);
+  box-shadow:0 16px 38px rgba(12,78,120,.14);
+  background:#fff;
+}
+.footer-cta.primary{
+  color:#fff;
+  border-color:transparent;
+  background:linear-gradient(135deg,#0f72df,#1597e8);
+  box-shadow:0 12px 28px rgba(20,132,220,.22);
+}
+.footer-values{
+  display:grid;
+  gap:16px;
+}
+.footer-value{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:10px;
+  border-radius:18px;
+  transition:transform .2s ease,background .2s ease;
+}
+.footer-value:hover{
+  transform:translateX(7px);
+  background:rgba(255,255,255,.48);
+}
+.value-icon{
+  width:54px;height:54px;
+  display:grid;place-items:center;
+  flex:0 0 auto;
+  border-radius:50%;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(255,255,255,.96);
+  box-shadow:0 12px 30px rgba(15,78,113,.10);
+  color:#1686c8;
+  font-size:22px;
+}
+.footer-value:nth-child(1) .value-icon,
+.footer-value:nth-child(4) .value-icon{color:#16a25c}
+.footer-value b{
+  font-size:16px;
+  line-height:1.25;
+}
+.footer-scene{
+  position:relative;
+  min-height:360px;
+}
+.footer-flask{
+  position:absolute;
+  right:6%;
+  bottom:0;
+  width:250px;
+  height:330px;
+  filter:drop-shadow(0 26px 28px rgba(17,94,132,.15));
+  transition:transform .25s ease;
+}
+.footer-scene:hover .footer-flask{
+  transform:translateY(-6px) rotate(1deg);
+}
+.flask-neck{
+  position:absolute;
+  left:89px;top:0;
+  width:72px;height:120px;
+  border:4px solid rgba(63,150,196,.48);
+  border-bottom:0;
+  border-radius:18px 18px 0 0;
+  background:linear-gradient(90deg,rgba(255,255,255,.48),rgba(255,255,255,.10));
+}
+.flask-body{
+  position:absolute;
+  left:29px;bottom:0;
+  width:192px;height:235px;
+  border:4px solid rgba(63,150,196,.48);
+  border-radius:38% 38% 18% 18% / 58% 58% 16% 16%;
+  background:linear-gradient(120deg,rgba(255,255,255,.55),rgba(213,244,252,.24));
+  overflow:hidden;
+}
+.flask-water{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:42%;
+  background:linear-gradient(180deg,rgba(94,207,226,.24),rgba(48,164,214,.38));
+}
+.sprout{
+  position:absolute;
+  left:50%;bottom:42%;
+  width:110px;height:145px;
+  transform:translateX(-50%);
+}
+.sprout-stem{
+  position:absolute;left:52px;bottom:0;
+  width:5px;height:118px;
+  border-radius:10px;
+  background:linear-gradient(#2a9b54,#74c76d);
+}
+.sprout-leaf{
+  position:absolute;
+  width:58px;height:29px;
+  background:linear-gradient(135deg,#81d677,#22984e);
+  border-radius:100% 0 100% 0;
+}
+.leaf-l{left:5px;top:35px;transform:rotate(-25deg)}
+.leaf-r{right:0;top:66px;transform:rotate(35deg) scaleX(-1)}
+.footer-script{
+  position:absolute;
+  top:15%;
+  left:-2%;
+  color:#0873db;
+  font-family:"Segoe Script","Brush Script MT",cursive;
+  font-size:32px;
+  line-height:1.15;
+  transform:rotate(-5deg);
+}
+
+/* lower footer */
+.footer-main{
+  display:grid;
+  grid-template-columns:.7fr 1fr 1.15fr .8fr 1.15fr;
+  gap:0;
+  padding:34px 6vw 30px;
+  border-top:1px solid rgba(44,103,141,.12);
+  background:rgba(244,250,255,.92);
+}
+.footer-column{
+  padding:0 28px;
+  border-right:1px solid rgba(44,103,141,.16);
+}
+.footer-column:first-child{padding-left:0}
+.footer-column:last-child{border-right:0;padding-right:0}
+.footer-column h3{
+  margin:0 0 18px;
+  padding-bottom:8px;
+  position:relative;
+  font-size:17px;
+}
+.footer-column h3::after{
+  content:"";
+  position:absolute;left:0;bottom:0;
+  width:34px;height:2px;
+  background:#2dbf72;
+}
+.footer-column a{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  margin:7px 0;
+  color:#5b7590;
+  text-decoration:none;
+  font-size:15px;
+  transition:transform .16s ease,color .16s ease;
+}
+.footer-column a:hover{
+  transform:translateX(5px);
+  color:#0d7fc8;
+}
+.footer-column p{
+  color:#617991;
+  line-height:1.5;
+  font-size:14px;
+}
+.footer-contact p{
+  margin-top:0;
+}
+.footer-contact span{
+  color:#0f82ca;
+  margin-right:7px;
+}
+.social-row{
+  display:flex;
+  gap:12px;
+}
+.social-btn{
+  width:44px !important;
+  height:44px;
+  margin:0 !important;
+  display:grid !important;
+  place-items:center;
+  border-radius:50%;
+  color:#fff !important;
+  background:linear-gradient(145deg,#0875bb,#0d95dd);
+  box-shadow:0 8px 20px rgba(14,120,186,.18);
+  font-weight:800;
+  font-size:18px !important;
+  transform:none !important;
+  transition:transform .18s ease,box-shadow .18s ease !important;
+}
+.social-btn:hover{
+  transform:translateY(-4px) scale(1.07) !important;
+  box-shadow:0 13px 28px rgba(14,120,186,.28);
+}
+.newsletter-form{
+  display:flex;
+  align-items:center;
+  padding:4px;
+  border-radius:999px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(21,84,124,.08);
+  border:1px solid rgba(84,135,167,.15);
+  transition:box-shadow .2s ease,border-color .2s ease;
+}
+.newsletter-form:focus-within{
+  border-color:rgba(19,133,216,.45);
+  box-shadow:0 10px 28px rgba(19,133,216,.14);
+}
+.newsletter-form input{
+  flex:1;
+  min-width:0;
+  height:44px;
+  padding:0 15px;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#17334f;
+}
+.newsletter-form button{
+  width:42px;height:42px;
+  border:0;
+  border-radius:50%;
+  color:#fff;
+  background:linear-gradient(135deg,#0c72da,#128be5);
+  cursor:pointer;
+  font-size:21px;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.newsletter-form button:hover{
+  transform:rotate(-8deg) scale(1.08);
+  box-shadow:0 8px 18px rgba(17,126,217,.22);
+}
+.newsletter-status{
+  min-height:20px;
+  padding-top:7px;
+  color:#4f6f88;
+  font-size:12px;
+}
+.footer-bottom{
+  display:grid;
+  grid-template-columns:1fr .7fr 1fr;
+  gap:28px;
+  align-items:center;
+  padding:25px 6vw;
+  background:#fff;
+  border-top:1px solid rgba(44,103,141,.10);
+}
+.footer-brand{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:10px;
+}
+.footer-brand strong{
+  color:#102e49;
+  letter-spacing:.08em;
+}
+.footer-brand span{
+  padding-left:10px;
+  border-left:1px solid #7892a6;
+  color:#5c7590;
+  font-size:13px;
+  letter-spacing:.05em;
+}
+.footer-brand small{
+  width:100%;
+  color:#7489a0;
+  letter-spacing:.22em;
+  font-size:9px;
+}
+.footer-slogan{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  color:#668099;
+  font-size:12px;
+  letter-spacing:.22em;
+  line-height:1.6;
+}
+.slogan-leaf{
+  font-size:32px;
+  color:#23a85e;
+}
+.footer-legal{
+  text-align:right;
+  color:#6c839a;
+}
+.footer-legal div{
+  display:flex;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:18px;
+  margin-bottom:10px;
+}
+.footer-legal a{
+  color:#617b94;
+  text-decoration:none;
+  font-size:12px;
+}
+.footer-legal a:hover{color:#0c7dc9}
+.footer-legal small{font-size:11px}
+
+@media(max-width:1100px){
+  .footer-hero-grid{grid-template-columns:1fr 1fr}
+  .footer-scene{grid-column:1/-1;min-height:290px}
+  .footer-flask{right:17%}
+  .footer-script{left:16%;top:20%}
+  .footer-main{grid-template-columns:1fr 1fr 1fr}
+  .footer-column{border-right:0;border-bottom:1px solid rgba(44,103,141,.12);padding:22px}
+  .footer-column:first-child{padding-left:22px}
+  .footer-column:last-child{padding-right:22px}
+  .footer-bottom{grid-template-columns:1fr}
+  .footer-legal{text-align:left}
+  .footer-legal div{justify-content:flex-start}
+  .footer-slogan{justify-content:flex-start}
+}
+@media(max-width:700px){
+  .footer-hero{padding:62px 22px 48px}
+  .footer-hero-grid{grid-template-columns:1fr}
+  .footer-copy h2{font-size:52px}
+  .footer-values{grid-template-columns:1fr 1fr}
+  .footer-scene{min-height:300px}
+  .footer-flask{right:0;width:210px;transform:scale(.86);transform-origin:bottom right}
+  .footer-script{left:0;font-size:25px}
+  .footer-main{grid-template-columns:1fr;padding:20px 22px}
+  .footer-column,.footer-column:first-child,.footer-column:last-child{padding:22px 0}
+  .footer-bottom{padding:24px 22px}
+}
+
+/* accessibility */
+@media(prefers-reduced-motion:reduce){
+  .footer-cta,.footer-value,.footer-flask,.footer-column a,.social-btn,.newsletter-form button{
+    transition:none !important;
+  }
+}
+</style>
+
+
+<style>
+.team-page{display:none;min-height:100vh;background:#f5f9fc;color:#0a2036}
+.team-page.active{display:block}
+body.team-mode > section:not(.team-page),
+body.team-mode > footer{display:none!important}
+
+.team-page-topbar{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;
+  padding:16px 24px;
+  background:rgba(245,249,252,.88);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(31,83,118,.10)
+}
+.team-back{
+  border:1px solid rgba(31,83,118,.18);
+  background:#fff;color:#0c2b46;border-radius:999px;
+  padding:11px 18px;font-weight:700;cursor:pointer;
+  transition:transform .2s ease,box-shadow .2s ease
+}
+.team-back:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,73,107,.12)}
+
+.team-hero{width:100%;background:#eef6fb;overflow:hidden}
+.team-hero-image{display:block;width:100%;height:auto}
+
+.team-content{padding:90px 6vw 120px}
+.team-content-inner{max-width:1280px;margin:auto}
+.team-section-label{font-size:13px;letter-spacing:.28em;color:#4f6f86;margin-bottom:16px}
+.team-content h2{
+  max-width:900px;margin:0 0 20px;
+  font-size:clamp(44px,6vw,78px);line-height:.98;letter-spacing:-.05em
+}
+.team-content-inner > p{
+  max-width:760px;color:#617489;font-size:20px;line-height:1.55
+}
+.team-placeholder-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:20px;margin-top:50px
+}
+.team-placeholder-grid article{
+  min-height:180px;padding:24px;border-radius:24px;background:#fff;
+  box-shadow:0 18px 50px rgba(18,61,86,.08);
+  transition:transform .22s ease,box-shadow .22s ease
+}
+.team-placeholder-grid article:hover{
+  transform:translateY(-6px);
+  box-shadow:0 28px 70px rgba(18,61,86,.14)
+}
+.team-placeholder-grid h3{margin:0 0 10px;font-size:22px}
+.team-placeholder-grid p{margin:0;color:#667b8e;line-height:1.5}
+
+@media(max-width:900px){.team-placeholder-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){
+  .team-content{padding:70px 22px 90px}
+  .team-placeholder-grid{grid-template-columns:1fr}
+}
+</style>
+
+
+<style>
+/* ===== PROFESORADO APROBADO: diseño exacto como sección completa ===== */
+.faculty-approved-section{
+  width:100%;
+  position:relative;
+  background:
+    linear-gradient(180deg,#f8fcff 0%,#eef7fb 100%);
+  overflow:hidden;
+  padding:0;
+  margin:0;
+}
+.faculty-approved-inner{
+  width:100%;
+  max-width:none;
+  margin:0;
+  position:relative;
+  overflow:hidden;
+}
+.faculty-approved-image{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  object-position:center top;
+}
+</style>
+
+
+<style>
+/* ===== CONTINUIDAD PROFESORADO -> POSTDOCTORALES ===== */
+.faculty-approved-section,
+.postdoc-approved-section{
+  margin:0;
+  padding:0;
+  width:100%;
+  background:#f4f9fc;
+  overflow:hidden;
+}
+
+.faculty-approved-inner,
+.postdoc-approved-inner{
+  width:100%;
+  margin:0;
+  padding:0;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Remove any visual gap between both approved image sections */
+.faculty-approved-section{
+  margin-bottom:-2px;
+}
+.postdoc-approved-section{
+  margin-top:-2px;
+}
+
+.faculty-approved-image,
+.postdoc-approved-image{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  object-position:center top;
+}
+
+/* Very subtle seam blend so the two sections feel like one continuous page */
+.postdoc-approved-section::before{
+  content:"";
+  display:block;
+  height:22px;
+  margin-top:-22px;
+  position:relative;
+  z-index:3;
+  pointer-events:none;
+  background:linear-gradient(
+    180deg,
+    rgba(244,249,252,0) 0%,
+    rgba(244,249,252,.38) 52%,
+    rgba(244,249,252,.82) 100%
+  );
+}
+
+@media(max-width:700px){
+  .faculty-approved-section,
+  .postdoc-approved-section{
+    overflow-x:hidden;
+  }
+}
+</style>
+
+\n<style>\n/* ===== EQUIPO COMPLETO: UNA SOLA IMAGEN LARGA + ANIMACION REAL POR SECCIONES ===== */\n.team-long-section{width:100%;margin:0;padding:0;background:#f4f9fc;overflow:hidden}\n.team-long-stage{position:relative;width:100%;overflow:hidden;isolation:isolate;background:#f4f9fc}\n.team-long-base{display:block;width:100%;height:auto;position:relative;z-index:1}\n.team-zone{position:absolute;left:0;right:0;z-index:3;pointer-events:auto;overflow:hidden;perspective:1400px}\n.zone-prof{top:0;height:31%}\n.zone-post{top:31%;height:23%}\n.zone-phd{top:54%;height:22%}\n.zone-collab{top:76%;height:24%}\n.zone-clone{position:absolute;left:0;width:100%;height:100%;top:0;background-image:var(--team-art);background-size:100% auto;background-repeat:no-repeat;pointer-events:none;will-change:transform,filter,opacity}\n.zone-prof .zone-clone{background-position:center 0%}\n.zone-post .zone-clone{background-position:center 31%}\n.zone-phd .zone-clone{background-position:center 54%}\n.zone-collab .zone-clone{background-position:center 76%}\n.team-long-stage{--team-art:url("assets/cepima-image-3.png")}\n\n/* subtle but visible section-specific motion */\n.zone-prof .zone-clone{animation:profFloat 7s ease-in-out infinite;opacity:.16}\n.zone-post .zone-clone{animation:postFloat 8s ease-in-out infinite;opacity:.15}\n.zone-phd .zone-clone{animation:phdFloat 7.6s ease-in-out infinite;opacity:.14}\n.zone-collab .zone-clone{animation:collabFloat 8.6s ease-in-out infinite;opacity:.14}\n@keyframes profFloat{0%,100%{transform:translate3d(0,0,0);filter:brightness(1)}50%{transform:translate3d(0,-6px,14px);filter:brightness(1.05)}}\n@keyframes postFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(5px,-3px,12px)}}\n@keyframes phdFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-4px,-5px,12px)}}\n@keyframes collabFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(4px,-4px,12px)}}\n\n/* moving scientific lines and dots */\n.zone-line{position:absolute;display:block;border:1px solid rgba(32,143,213,.34);border-radius:50%;pointer-events:none;z-index:4}\n.zone-line.line-a{width:28%;height:18%;right:8%;top:15%;animation:orbitSoft 18s linear infinite}\n.zone-line.line-b{width:18%;height:11%;left:38%;bottom:9%;border-color:rgba(48,190,108,.32);animation:orbitSoftReverse 22s linear infinite}\n.zone-post .line-a{right:15%;top:18%;animation-duration:20s}\n.zone-post .line-b{left:12%;bottom:10%;animation-duration:24s}\n.zone-phd .line-a{right:8%;top:20%;animation-duration:21s}\n.zone-phd .line-b{left:28%;bottom:8%;animation-duration:25s}\n.zone-collab .line-a{right:18%;top:14%;animation-duration:23s}\n.zone-collab .line-b{left:16%;bottom:12%;animation-duration:26s}\n@keyframes orbitSoft{from{transform:rotate(-8deg)}to{transform:rotate(352deg)}}\n@keyframes orbitSoftReverse{from{transform:rotate(10deg)}to{transform:rotate(-350deg)}}\n.zone-dot{position:absolute;width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#45d68c,#3fa3eb);box-shadow:0 0 14px rgba(50,160,220,.45);z-index:5;pointer-events:none;animation:dotPulse 4s ease-in-out infinite}\n.zone-prof .dot-a{right:29%;top:20%}.zone-post .dot-a{right:24%;top:28%}.zone-phd .dot-a{right:15%;top:27%}.zone-collab .dot-a{right:32%;top:22%}\n@keyframes dotPulse{0%,100%{transform:scale(.9);opacity:.55}50%{transform:scale(1.25);opacity:1}}\n\n/* hover depth only inside hovered category */\n.team-zone{transition:filter .2s ease}\n.team-zone:hover{filter:brightness(1.012)}\n@media(max-width:800px){.zone-clone{opacity:.08!important}.zone-line{opacity:.45}.zone-dot{opacity:.7}}\n@media(prefers-reduced-motion:reduce){.zone-clone,.zone-line,.zone-dot{animation:none!important}}\n</style>\n
+
+<style>
+/* ===== FIX: TEAM PAGE FULL-WIDTH + 4K ARTWORK ===== */
+html, body{
+  margin:0 !important;
+  padding:0 !important;
+  width:100% !important;
+  max-width:none !important;
+  overflow-x:hidden !important;
+}
+
+.team-page,
+.team-page.active{
+  width:100vw !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow-x:hidden !important;
+}
+
+.team-page-topbar{
+  width:100% !important;
+  box-sizing:border-box !important;
+}
+
+.team-page .team-hero,
+.team-page .animated-team-section,
+.team-page .team-art-section,
+.team-page .faculty-approved-section,
+.team-page .postdoc-approved-section,
+.team-page section{
+  width:100vw !important;
+  max-width:none !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  box-sizing:border-box !important;
+}
+
+.team-page img,
+.team-page .base-art,
+.team-page .team-art-image,
+.team-page .faculty-approved-image,
+.team-page .postdoc-approved-image{
+  display:block !important;
+  width:100vw !important;
+  max-width:none !important;
+  height:auto !important;
+  object-fit:contain !important;
+  object-position:center top !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+
+/* Long poster section must occupy entire browser width */
+.team-page .animated-team-stage,
+.team-page .team-art-stage,
+.team-page .faculty-approved-inner,
+.team-page .postdoc-approved-inner{
+  width:100vw !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  left:0 !important;
+  right:auto !important;
+  overflow:hidden !important;
+}
+
+/* Remove inherited container constraints that caused the right blank strip */
+.team-page .container,
+.team-page .wrap,
+.team-page .inner,
+.team-page [class*="container"],
+.team-page [class*="wrap"]{
+  max-width:none !important;
+}
+
+/* Keep top bar crisp and separate from artwork */
+.team-page-topbar{
+  position:sticky !important;
+  top:0 !important;
+  z-index:100 !important;
+  background:rgba(245,249,252,.96) !important;
+  backdrop-filter:blur(12px);
+}
+</style>
+
+
+<style>
+/* Ajuste: se eliminó la barra de anuncio antes de la sección de Equipo. */
+.team-page .animated-team-section:first-of-type,
+.team-page .team-art-section:first-of-type,
+.team-page .faculty-approved-section:first-of-type{
+  margin-top:0 !important;
+}
+</style>
+
+
+<style>
+/* =========================================================
+   CORRECCIÓN: "NUESTRO EQUIPO" SOLO EXISTE EN LA VISTA EQUIPO
+   ========================================================= */
+
+/* Por defecto, la página de Equipo JAMÁS se muestra en la Home. */
+#team-page.team-page{
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+
+/* Solo se activa cuando el usuario pulsa "Equipo". */
+body.team-mode #team-page.team-page.active{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  pointer-events:auto !important;
+}
+
+/* En modo Equipo ocultamos TODA la Home y el footer de Home. */
+body.team-mode > section:not(#team-page),
+body.team-mode > footer{
+  display:none !important;
+}
+
+/* En modo Home, todo el contenido normal permanece visible,
+   pero nunca se cuela la sección Equipo. */
+body:not(.team-mode) #team-page{
+  display:none !important;
+}
+
+/* Evita saltos o restos del bloque oculto. */
+#team-page{
+  margin:0 !important;
+  padding:0 !important;
+}
+</style>
+
+</head>
+<body>
+
+<section class="hero" id="top">
+  <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</section>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<aside class="menu-panel" id="menuPanel">
+  <a href="#about">Sobre nosotros</a>
+  <a href="#research">Investigación</a>
+  <a href="#projects">Proyectos e impacto</a>
+  <a href="#team-page" class="js-team-link">Equipo</a>
+  <a href="#">Publicaciones</a>
+</aside>
+
+<section class="section" id="about">
+  <div class="wrap about-grid">
+    <div class="reveal-left">
+      <div class="label">01 — Sobre nosotros</div>
+      <h2>Ciencia e ingeniería para un futuro más sostenible.</h2>
+      <p class="lead">CEPIMA integra ingeniería de procesos e ingeniería ambiental para desarrollar soluciones científicas y tecnológicas aplicadas a procesos industriales más eficientes, sostenibles y circulares.</p>
+      <div class="stats">
+        <div class="stat"><strong data-count="25">0</strong><span>Años de trayectoria</span></div>
+        <div class="stat"><strong data-count="40">0</strong><span>Investigadores</span></div>
+        <div class="stat"><strong data-count="80">0</strong><span>Publicaciones</span></div>
+        <div class="stat"><strong data-count="15">0</strong><span>Proyectos</span></div>
+      </div>
+    </div>
+
+    <div class="stage reveal-right" id="stage">
+      <div class="stage-bg"></div>
+      <div class="aura"></div>
+      <div class="orbit" id="orbit"></div>
+      <div class="globe" id="globe"></div>
+      <div class="orbit-dot d1"></div>
+      <div class="orbit-dot d2"></div>
+      <div class="orbit-dot d3"></div>
+
+      <div class="float-card c1"><b>Procesos más limpios</b><small>Modelado, simulación y optimización.</small></div>
+      <div class="float-card c2"><b>Economía circular</b><small>Residuos convertidos en recursos.</small></div>
+      <div class="float-card c3"><b>Reducción de emisiones</b><small>Captura de CO₂ y gases fluorados.</small></div>
+      <div class="float-card c4"><b>Recursos para el futuro</b><small>Agua, nutrientes y materiales recuperados.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section research" id="research">
+  <div class="wrap">
+    <div class="label reveal">02 — Investigación</div>
+    <h2 class="reveal">Cuatro áreas. Un mismo objetivo.</h2>
+    <p class="lead reveal">Transformar retos ambientales y de proceso en soluciones aplicables mediante ciencia, modelado, materiales y tecnologías avanzadas.</p>
+
+    <div class="research-grid">
+      <article class="tilt-card research-card reveal">
+        <span class="num">01</span>
+        <h3>Ingeniería de sistemas de procesos</h3>
+        <p>Modelado, simulación, optimización, integración de procesos y apoyo a la toma de decisiones.</p>
+        <div class="orb"></div>
+      </article>
+
+      <article class="tilt-card research-card reveal">
+        <span class="num">02</span>
+        <h3>Tratamiento y recuperación de recursos en aguas</h3>
+        <p>Fotocatálisis, ozonización, Fenton, membranas y recuperación de agua, nutrientes y metales.</p>
+        <div class="orb"></div>
+      </article>
+
+      <article class="tilt-card research-card reveal">
+        <span class="num">03</span>
+        <h3>Captura y separación de gases</h3>
+        <p>CO₂ y gases fluorados mediante carbones activados, MOFs, polímeros porosos, matrices 3D y líquidos iónicos.</p>
+        <div class="orb"></div>
+      </article>
+
+      <article class="tilt-card research-card reveal">
+        <span class="num">04</span>
+        <h3>Valorización de residuos y simbiosis industrial</h3>
+        <p>Transformación de corrientes residuales en recursos útiles dentro de modelos industriales circulares.</p>
+        <div class="orb"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section projects" id="projects">
+  <div class="wrap">
+    <div class="label reveal">03 — Proyectos e impacto</div>
+    <h2 class="reveal">Del laboratorio a procesos reales.</h2>
+    <p class="lead reveal">Las líneas de CEPIMA buscan impacto científico, ambiental e industrial, con potencial de aplicación y escalado.</p>
+
+    <div class="project-grid">
+      <article class="tilt-card project-card reveal">
+        <span class="tag">P2CE</span>
+        <h3>Powering Circular Economy</h3>
+        <p>Herramientas de modelado, integración y optimización para impulsar circularidad industrial.</p>
+      </article>
+
+      <article class="tilt-card project-card reveal">
+        <span class="tag">CO₂</span>
+        <h3>Captura y reutilización de CO₂</h3>
+        <p>Adsorción, absorción y simulación para capturar CO₂ de forma selectiva y estudiar su reutilización.</p>
+      </article>
+
+      <article class="tilt-card project-card reveal">
+        <span class="tag">Gases</span>
+        <h3>Separación y recuperación</h3>
+        <p>Materiales avanzados y procesos de separación para reducir emisiones de gases con alto potencial climático.</p>
+      </article>
+
+      <article class="tilt-card project-card reveal">
+        <span class="tag">Agua</span>
+        <h3>Tratamiento y recuperación</h3>
+        <p>Tecnologías avanzadas para eliminar contaminantes y recuperar agua, nutrientes y metales.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section closing">
+  <div class="ring r1"></div>
+  <div class="ring r2"></div>
+  <div class="ring r3"></div>
+  <h3 class="reveal">Transformamos retos ambientales en oportunidades tecnológicas reales.</h3>
+</section>
+
+
+
+
+
+<section class="cepima-extra-banner cepima-3d-banner" id="cepima-extra-banner">
+  <div class="cepima-3d-stage" id="cepima3dStage">
+    <img class="cepima-base-image" src="assets/cepima-image-4.png" alt="CEPIMA — Ciencia e ingeniería para un futuro más sostenible">
+
+    
+    <!-- ÚNICOS ELEMENTOS ANIMADOS: planeta + líneas orbitales -->
+    <div class="cepima-planet-slice" id="cepimaPlanetSlice"></div>
+
+    <div class="cepima-orbit-layer orbit-a"></div>
+    <div class="cepima-orbit-layer orbit-b"></div>
+    <div class="cepima-orbit-layer orbit-c"></div>
+    
+  </div>
+</section>
+
+
+
+<script>
+const reduced = false;
+const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+/* MENU FUNCIONAL */
+const btn = document.getElementById('menuBtn');
+const panel = document.getElementById('menuPanel');
+const overlay = document.getElementById('menuOverlay');
+
+function toggleMenu(force){
+  const open = typeof force === 'boolean'
+    ? force
+    : !panel.classList.contains('open');
+
+  btn.classList.toggle('open',open);
+  panel.classList.toggle('open',open);
+  overlay.classList.toggle('open',open);
+  btn.setAttribute('aria-expanded',String(open));
+}
+
+btn.addEventListener('click',()=>toggleMenu());
+overlay.addEventListener('click',()=>toggleMenu(false));
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') toggleMenu(false);
+});
+panel.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click',()=>toggleMenu(false));
+});
+
+/* REVEAL */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+      io.unobserve(entry.target);
+    }
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>io.observe(el));
+
+/* COUNTERS */
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const target = +el.dataset.count;
+  const obs = new IntersectionObserver(entries=>{
+    if(!entries[0].isIntersecting) return;
+    let value=0;
+    const step=()=>{
+      value += Math.max(1,Math.ceil(target/46));
+      if(value>target) value=target;
+      el.textContent='+'+value;
+      if(value<target) requestAnimationFrame(step);
+    };
+    step();
+    obs.disconnect();
+  },{threshold:.55});
+  obs.observe(el);
+});
+
+/* TILT 3D */
+function attachTilt(card,rx=18,ry=22,lift=10){
+  if(!fine || reduced) return;
+
+  card.addEventListener('pointermove',e=>{
+    const r=card.getBoundingClientRect();
+    const nx=(e.clientX-r.left)/r.width-.5;
+    const ny=(e.clientY-r.top)/r.height-.5;
+
+    card.style.transform=
+      `perspective(800px)
+       rotateX(${-ny*rx}deg)
+       rotateY(${nx*ry}deg)
+       translateZ(22px)
+       translateY(-${lift}px)
+       scale(1.035)`;
+
+    card.style.boxShadow=
+      `${-nx*30}px ${24+ny*20}px 68px rgba(0,0,0,.20)`;
+
+    const orb=card.querySelector('.orb');
+    if(orb){
+      orb.style.transform=`translate3d(${nx*42}px,${ny*42}px,48px) scale(1.12)`;
+    }
+  });
+
+  card.addEventListener('pointerleave',()=>{
+    card.style.transform='';
+    card.style.boxShadow='';
+    const orb=card.querySelector('.orb');
+    if(orb) orb.style.transform='';
+  });
+}
+document.querySelectorAll('.tilt-card').forEach(card=>attachTilt(card));
+
+/* GLOBO + TARJETAS 3D */
+const stage=document.getElementById('stage');
+const globe=document.getElementById('globe');
+const orbit=document.getElementById('orbit');
+const cards=[...stage.querySelectorAll('.float-card')];
+
+if(fine && !reduced){
+  stage.addEventListener('pointermove',e=>{
+    const r=stage.getBoundingClientRect();
+    const nx=(e.clientX-r.left)/r.width-.5;
+    const ny=(e.clientY-r.top)/r.height-.5;
+
+    globe.style.transform=
+      `translate(-50%,-50%)
+       perspective(850px)
+       rotateX(${-ny*34}deg)
+       rotateY(${nx*46}deg)
+       translateZ(80px)
+       scale(1.08)`;
+
+    globe.style.boxShadow=
+      `${-nx*40}px ${30+ny*20}px 100px rgba(12,72,111,.32),
+       inset ${nx*26}px ${ny*20}px 58px rgba(0,0,0,.18)`;
+
+    orbit.style.transform=
+      `translate(-50%,-50%)
+       rotateX(${66-ny*26}deg)
+       rotateZ(${-10+nx*34}deg)
+       scale(${1.03+Math.abs(nx)*.1})`;
+
+    cards.forEach((card,i)=>{
+      const dx=nx*(28+i*11);
+      const dy=ny*(22+i*9);
+      const dz=36+i*16;
+      card.style.transform=
+        `translate3d(${dx}px,${dy}px,${dz}px)
+         rotateX(${-ny*13}deg)
+         rotateY(${nx*18}deg)`;
+    });
+  });
+
+  stage.addEventListener('pointerleave',()=>{
+    globe.style.transform='translate(-50%,-50%)';
+    globe.style.boxShadow='';
+    orbit.style.transform='translate(-50%,-50%) rotateX(66deg) rotateZ(-10deg)';
+    cards.forEach(c=>c.style.transform='');
+  });
+}
+
+/* ORBITING DOTS */
+const dots=[...document.querySelectorAll('.orbit-dot')];
+function moveDots(time){
+  const cx=stage.clientWidth/2;
+  const cy=stage.clientHeight/2;
+  const rx=Math.min(stage.clientWidth*.42,280);
+  const ry=105;
+
+  dots.forEach((dot,i)=>{
+    const a=time*.00072+i*2.1;
+    const z=Math.sin(a);
+    dot.style.left=(cx+Math.cos(a)*rx-6)+'px';
+    dot.style.top=(cy+Math.sin(a)*ry-6)+'px';
+    dot.style.transform=`scale(${.75+(z+1)*.2})`;
+    dot.style.opacity=.35+(z+1)*.25;
+  });
+
+  requestAnimationFrame(moveDots);
+}
+if(!reduced) requestAnimationFrame(moveDots);
+</script>
+
+
+
+
+<script>
+(function(){
+  const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* Reliable scroll reveal */
+  const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+  function revealNow(){
+    revealEls.forEach(el=>{
+      const r=el.getBoundingClientRect();
+      if(r.top < innerHeight*0.9 && r.bottom > 0){
+        el.classList.add('show');
+      }
+    });
+  }
+  revealNow();
+  addEventListener('scroll',revealNow,{passive:true});
+  addEventListener('resize',revealNow);
+
+  /* Clean progress bar */
+  const bar=document.createElement('div');
+  bar.id='scrollProgress';
+  document.body.appendChild(bar);
+  function updateProgress(){
+    const max=document.documentElement.scrollHeight-innerHeight;
+    bar.style.width=(max>0 ? (scrollY/max)*100 : 0)+'%';
+  }
+  updateProgress();
+  addEventListener('scroll',updateProgress,{passive:true});
+
+  /* Subtle parallax only on banner */
+  const hero=document.querySelector('.hero');
+  addEventListener('scroll',()=>{
+    const y=Math.min(scrollY,innerHeight);
+    hero.style.backgroundPosition=`center calc(50% + ${y*.035}px)`;
+  },{passive:true});
+
+  /* Strong but controlled 3D on hover */
+  function refinedTilt(el,rx=12,ry=14,lift=6){
+    if(!fine) return;
+    el.addEventListener('pointermove',e=>{
+      const r=el.getBoundingClientRect();
+      const nx=(e.clientX-r.left)/r.width-.5;
+      const ny=(e.clientY-r.top)/r.height-.5;
+      el.style.transform=
+        `perspective(950px) rotateX(${-ny*rx}deg) rotateY(${nx*ry}deg) translateY(-${lift}px) scale(1.02)`;
+      el.style.boxShadow=
+        `${-nx*18}px ${18+ny*10}px 44px rgba(0,0,0,.14)`;
+
+      const orb=el.querySelector('.orb');
+      if(orb){
+        orb.style.transform=`translate3d(${nx*22}px,${ny*22}px,26px)`;
+      }
+    });
+    el.addEventListener('pointerleave',()=>{
+      el.style.transform='';
+      el.style.boxShadow='';
+      const orb=el.querySelector('.orb');
+      if(orb) orb.style.transform='';
+    });
+  }
+  document.querySelectorAll('.tilt-card').forEach(el=>refinedTilt(el));
+
+  /* Globe parallax / 3D follows mouse, but smoothly */
+  const stage=document.getElementById('stage');
+  const globe=document.getElementById('globe');
+  const orbit=document.getElementById('orbit');
+  const cards=stage ? [...stage.querySelectorAll('.float-card')] : [];
+
+  if(stage && globe && fine){
+    stage.addEventListener('pointermove',e=>{
+      const r=stage.getBoundingClientRect();
+      const nx=(e.clientX-r.left)/r.width-.5;
+      const ny=(e.clientY-r.top)/r.height-.5;
+
+      globe.style.transform=
+        `translate(-50%,-50%) perspective(900px) rotateX(${-ny*18}deg) rotateY(${nx*24}deg) translateZ(46px) scale(1.035)`;
+
+      if(orbit){
+        orbit.style.transform=
+          `translate(-50%,-50%) rotateX(${66-ny*12}deg) rotateZ(${-10+nx*14}deg)`;
+      }
+
+      cards.forEach((card,i)=>{
+        const factor=10+i*4;
+        card.style.transform=
+          `translate3d(${nx*factor}px,${ny*factor}px,${18+i*6}px) rotateY(${nx*6}deg)`;
+      });
+    });
+
+    stage.addEventListener('pointerleave',()=>{
+      globe.style.transform='translate(-50%,-50%)';
+      if(orbit) orbit.style.transform='translate(-50%,-50%) rotateX(66deg) rotateZ(-10deg)';
+      cards.forEach(c=>c.style.transform='');
+    });
+  }
+
+  /* One subtle orbital particle */
+  if(stage){
+    const dot=document.createElement('div');
+    dot.className='clean-orbit-dot';
+    stage.appendChild(dot);
+
+    function animateDot(t){
+      const cx=stage.clientWidth/2;
+      const cy=stage.clientHeight/2;
+      const rx=Math.min(stage.clientWidth*.38,250);
+      const ry=95;
+      const a=t*.00034;
+      dot.style.left=(cx+Math.cos(a)*rx-4.5)+'px';
+      dot.style.top=(cy+Math.sin(a)*ry-4.5)+'px';
+      requestAnimationFrame(animateDot);
+    }
+    requestAnimationFrame(animateDot);
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  const banner=document.querySelector('.cepima-extra-banner-inner');
+  const img=banner ? banner.querySelector('img') : null;
+  const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  if(banner && img && fine){
+    banner.addEventListener('pointermove',e=>{
+      const r=banner.getBoundingClientRect();
+      const nx=(e.clientX-r.left)/r.width-.5;
+      const ny=(e.clientY-r.top)/r.height-.5;
+      img.style.transform=`scale(1.018) translate(${nx*-5}px,${ny*-4}px)`;
+    });
+    banner.addEventListener('pointerleave',()=>{
+      img.style.transform='scale(1.001)';
+    });
+  }
+})();
+</script>
+
+
+
+<script>
+/* Banner estático por solicitud del usuario:
+   no hay interacción con mouse.
+   Solo el planeta y las líneas orbitales se animan mediante CSS. */
+</script>
+
+
+
+
+<section class="team-page" id="team-page" aria-label="Equipo CEPIMA">
+  <div class="team-page-topbar">
+    <button class="team-back" id="teamBackBtn" type="button">← Volver</button>
+  </div>
+
+  <section class="team-hero">
+    <img src="assets/cepima-image-5.png" alt="Equipo CEPIMA" class="team-hero-image">
+  </section>
+
+  
+
+<section class="team-long-section" id="equipo-completo">
+  <div class="team-long-stage" id="teamLongStage">
+    <img class="team-long-base" src="assets/cepima-image-6.png" alt="Equipo CEPIMA completo">
+
+    <div class="team-zone zone-prof" data-zone="prof">
+      <div class="zone-clone"></div>
+      <span class="zone-line line-a"></span>
+      <span class="zone-line line-b"></span>
+      <span class="zone-dot dot-a"></span>
+    </div>
+
+    <div class="team-zone zone-post" data-zone="post">
+      <div class="zone-clone"></div>
+      <span class="zone-line line-a"></span>
+      <span class="zone-line line-b"></span>
+      <span class="zone-dot dot-a"></span>
+    </div>
+
+    <div class="team-zone zone-phd" data-zone="phd">
+      <div class="zone-clone"></div>
+      <span class="zone-line line-a"></span>
+      <span class="zone-line line-b"></span>
+      <span class="zone-dot dot-a"></span>
+    </div>
+
+    <div class="team-zone zone-collab" data-zone="collab">
+      <div class="zone-clone"></div>
+      <span class="zone-line line-a"></span>
+      <span class="zone-line line-b"></span>
+      <span class="zone-dot dot-a"></span>
+    </div>
+  </div>
+</section>
+
+
+
+</section>
+
+<footer class="cepima-footer" id="footer">
+  <div class="footer-hero">
+    <div class="footer-hero-overlay"></div>
+
+    <div class="footer-hero-grid">
+      <div class="footer-copy">
+        <div class="footer-eyebrow">CONECTEMOS PARA UN FUTURO SOSTENIBLE</div>
+        <h2>Hagamos posible<br><span>el cambio juntos.</span></h2>
+        <p>
+          Desde la investigación hasta la implementación, desarrollamos soluciones
+          tecnológicas con impacto real en la industria y en el planeta.
+        </p>
+
+        <div class="footer-actions">
+          <a class="footer-cta primary" href="mailto:cepima@upc.edu?subject=Contacto%20desde%20la%20web%20CEPIMA">
+            Contáctanos <span>→</span>
+          </a>
+          <a class="footer-cta" href="#projects">
+            Conoce nuestros proyectos <span>→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-values">
+        <div class="footer-value"><span class="value-icon">◌</span><b>Soluciones<br>sostenibles</b></div>
+        <div class="footer-value"><span class="value-icon">●</span><b>Colaboración<br>con impacto</b></div>
+        <div class="footer-value"><span class="value-icon">⌬</span><b>Ciencia<br>aplicada</b></div>
+        <div class="footer-value"><span class="value-icon">↻</span><b>Un futuro<br>más limpio</b></div>
+      </div>
+
+      <div class="footer-scene">
+        <div class="footer-flask">
+          <div class="flask-neck"></div>
+          <div class="flask-body">
+            <div class="flask-water"></div>
+            <div class="sprout">
+              <span class="sprout-stem"></span>
+              <span class="sprout-leaf leaf-l"></span>
+              <span class="sprout-leaf leaf-r"></span>
+            </div>
+          </div>
+        </div>
+        <div class="footer-script">Investigación hoy,<br>impacto mañana</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-main">
+    <div class="footer-column">
+      <h3>Navega</h3>
+      <a href="#top">Inicio</a>
+      <a href="#about">Sobre nosotros</a>
+      <a href="#research">Investigación</a>
+      <a href="#projects">Proyectos</a>
+      <a href="#team-page" class="js-team-link">Equipo</a>
+      <a href="#">Publicaciones</a>
+      <a href="mailto:cepima@upc.edu">Contacto</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>Líneas de investigación</h3>
+      <a href="#research">Economía circular</a>
+      <a href="#research">Optimización de procesos</a>
+      <a href="#research">Tratamiento de aguas</a>
+      <a href="#research">Simbiosis industrial</a>
+      <a href="#research">Modelado y simulación</a>
+      <a href="#research">Impacto ambiental</a>
+    </div>
+
+    <div class="footer-column footer-contact">
+      <h3>Contáctanos</h3>
+      <p><span>⌖</span> Universitat Politècnica de Catalunya<br>Campus Diagonal-Besòs (EEBE)<br>Barcelona, España</p>
+      <a href="mailto:cepima@upc.edu"><span>✉</span> cepima@upc.edu</a>
+      <a href="tel:+34934017989"><span>☎</span> +34 93 401 79 89</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>Síguenos</h3>
+      <div class="social-row">
+        <a class="social-btn" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+        <a class="social-btn" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
+        <a class="social-btn" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">◎</a>
+      </div>
+    </div>
+
+    <div class="footer-column newsletter-column">
+      <h3>Boletín</h3>
+      <p>Recibe novedades sobre proyectos, publicaciones y oportunidades de colaboración.</p>
+
+      <form class="newsletter-form" id="newsletterForm">
+        <input
+          id="newsletterEmail"
+          type="email"
+          name="email"
+          placeholder="Tu correo electrónico"
+          autocomplete="email"
+          required
+        >
+        <button type="submit" aria-label="Enviar correo">→</button>
+      </form>
+      <div class="newsletter-status" id="newsletterStatus" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-brand">
+      <strong>CEPIMA</strong>
+      <span>UNIVERSITAT POLITÈCNICA DE CATALUNYA</span>
+      <small>PEOPLE + RESEARCH + A SUSTAINABLE TOMORROW</small>
+    </div>
+
+    <div class="footer-slogan">
+      <span class="slogan-leaf">◌</span>
+      <span>CIENCIA HOY.<br>IMPACTO MAÑANA.</span>
+    </div>
+
+    <div class="footer-legal">
+      <div>
+        <a href="#">Aviso legal</a>
+        <a href="#">Política de privacidad</a>
+        <a href="#">Accesibilidad</a>
+      </div>
+      <small>© 2026 CEPIMA - UPC. Todos los derechos reservados.</small>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+/* ===== FOOTER INTERACTIONS ===== */
+(function(){
+  const form=document.getElementById('newsletterForm');
+  const input=document.getElementById('newsletterEmail');
+  const status=document.getElementById('newsletterStatus');
+
+  if(form && input && status){
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+
+      const email=input.value.trim();
+      if(!email){
+        status.textContent='Escribe un correo válido.';
+        return;
+      }
+
+      /* Local HTML cannot send mail by itself without a mail service/backend.
+         This opens the visitor's email client with a prepared subscription message.
+         Change cepima@upc.edu here if you want another destination. */
+      const subject=encodeURIComponent('Suscripción al boletín CEPIMA');
+      const body=encodeURIComponent('Quiero recibir novedades de CEPIMA.\n\nCorreo del suscriptor: '+email);
+      window.location.href='mailto:cepima@upc.edu?subject='+subject+'&body='+body;
+
+      status.textContent='Abriendo tu aplicación de correo…';
+    });
+  }
+
+  /* Pointer feedback for value cards */
+  document.querySelectorAll('.footer-value').forEach(card=>{
+    card.addEventListener('pointerdown',()=>card.style.transform='scale(.98)');
+    card.addEventListener('pointerup',()=>card.style.transform='');
+    card.addEventListener('pointerleave',()=>card.style.transform='');
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  const teamPage = document.getElementById('team-page');
+  const backBtn = document.getElementById('teamBackBtn');
+
+  function openTeamPage(){
+    document.body.classList.add('team-mode');
+    teamPage.classList.add('active');
+    history.pushState({team:true}, '', '#team-page');
+    window.scrollTo(0,0);
+  }
+
+  function closeTeamPage(updateHistory=true){
+    document.body.classList.remove('team-mode');
+    teamPage.classList.remove('active');
+    if(updateHistory){
+      history.pushState({}, '', location.pathname + location.search);
+    }
+    window.scrollTo(0,0);
+  }
+
+  document.addEventListener('click', function(e){
+    const link = e.target.closest('a');
+    if(!link) return;
+    if(link.textContent.trim().toLowerCase() === 'equipo'){
+      e.preventDefault();
+      openTeamPage();
+    }
+  });
+
+  if(backBtn){
+    backBtn.addEventListener('click', ()=>closeTeamPage());
+  }
+
+  window.addEventListener('popstate', function(){
+    if(location.hash === '#team-page'){
+      document.body.classList.add('team-mode');
+      teamPage.classList.add('active');
+      window.scrollTo(0,0);
+    }else{
+      document.body.classList.remove('team-mode');
+      teamPage.classList.remove('active');
+    }
+  });
+
+  if(location.hash === '#team-page'){
+    document.body.classList.add('team-mode');
+    teamPage.classList.add('active');
+  }
+})();
+</script>
+
+\n<script>\n(function(){\n  const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;\n  if(!fine) return;\n  document.querySelectorAll('.team-zone').forEach((zone,idx)=>{\n    const clone=zone.querySelector('.zone-clone');\n    zone.addEventListener('pointermove',e=>{\n      const r=zone.getBoundingClientRect();\n      const x=(e.clientX-r.left)/r.width-.5;\n      const y=(e.clientY-r.top)/r.height-.5;\n      const dx=x*(6+idx*1.2);\n      const dy=y*(4+idx*.8);\n      clone.style.transform=`translate3d(${dx}px,${dy}px,18px) rotateX(${-y*1.8}deg) rotateY(${x*2.2}deg)`;\n    });\n    zone.addEventListener('pointerleave',()=>{clone.style.transform='';});\n  });\n})();\n</script>\n
+
+<script>
+/* =========================================================
+   NAVEGACIÓN HOME <-> EQUIPO
+   ========================================================= */
+(function(){
+  const teamPage = document.getElementById('team-page');
+  const backBtn = document.getElementById('teamBackBtn');
+
+  if(!teamPage) return;
+
+  function showHome(){
+    document.body.classList.remove('team-mode');
+    teamPage.classList.remove('active');
+    window.scrollTo(0,0);
+  }
+
+  function showTeam(pushState){
+    document.body.classList.add('team-mode');
+    teamPage.classList.add('active');
+
+    if(pushState && location.hash !== '#team-page'){
+      history.pushState({team:true}, '', '#team-page');
+    }
+
+    window.scrollTo(0,0);
+  }
+
+  /* Estado correcto al abrir/refrescar el archivo. */
+  if(location.hash === '#team-page'){
+    showTeam(false);
+  }else{
+    showHome();
+  }
+
+  /* Cualquier enlace cuyo texto sea Equipo abre esa vista. */
+  document.addEventListener('click', function(e){
+    const link = e.target.closest('a');
+    if(!link) return;
+
+    const isTeamLink =
+      link.classList.contains('js-team-link') ||
+      link.getAttribute('href') === '#team-page' ||
+      link.textContent.trim().toLowerCase() === 'equipo';
+
+    if(isTeamLink){
+      e.preventDefault();
+      showTeam(true);
+    }
+  });
+
+  if(backBtn){
+    backBtn.addEventListener('click', function(){
+      history.pushState({}, '', location.pathname + location.search);
+      showHome();
+    });
+  }
+
+  window.addEventListener('popstate', function(){
+    if(location.hash === '#team-page'){
+      showTeam(false);
+    }else{
+      showHome();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
