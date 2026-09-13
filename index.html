@@ -20,7 +20,7 @@ button{font:inherit}
 .hero{
   min-height:100vh;
   position:relative;
-  background:url("assets/cepima-image-1.png") center/cover no-repeat;
+  background:url("assets/img_001.png") center/cover no-repeat;
   overflow:hidden;
 }
 .hero::after{
@@ -403,7 +403,7 @@ h2{font-size:clamp(44px,6vw,82px);line-height:.98;letter-spacing:-.055em;margin:
 
 <style>
 /* ===== CEPIMA BANNER 3D INTERACTIVO ===== */
-.cepima-3d-stage{--cepima-banner-url:url("assets/cepima-image-2.png");}
+.cepima-3d-stage{--cepima-banner-url:url("assets/img_002.png");}
 .cepima-3d-banner{
   width:100%;
   padding:0;
@@ -1229,7 +1229,57 @@ body.team-mode > footer{display:none!important}
 }
 </style>
 
-\n<style>\n/* ===== EQUIPO COMPLETO: UNA SOLA IMAGEN LARGA + ANIMACION REAL POR SECCIONES ===== */\n.team-long-section{width:100%;margin:0;padding:0;background:#f4f9fc;overflow:hidden}\n.team-long-stage{position:relative;width:100%;overflow:hidden;isolation:isolate;background:#f4f9fc}\n.team-long-base{display:block;width:100%;height:auto;position:relative;z-index:1}\n.team-zone{position:absolute;left:0;right:0;z-index:3;pointer-events:auto;overflow:hidden;perspective:1400px}\n.zone-prof{top:0;height:31%}\n.zone-post{top:31%;height:23%}\n.zone-phd{top:54%;height:22%}\n.zone-collab{top:76%;height:24%}\n.zone-clone{position:absolute;left:0;width:100%;height:100%;top:0;background-image:var(--team-art);background-size:100% auto;background-repeat:no-repeat;pointer-events:none;will-change:transform,filter,opacity}\n.zone-prof .zone-clone{background-position:center 0%}\n.zone-post .zone-clone{background-position:center 31%}\n.zone-phd .zone-clone{background-position:center 54%}\n.zone-collab .zone-clone{background-position:center 76%}\n.team-long-stage{--team-art:url("assets/cepima-image-3.png")}\n\n/* subtle but visible section-specific motion */\n.zone-prof .zone-clone{animation:profFloat 7s ease-in-out infinite;opacity:.16}\n.zone-post .zone-clone{animation:postFloat 8s ease-in-out infinite;opacity:.15}\n.zone-phd .zone-clone{animation:phdFloat 7.6s ease-in-out infinite;opacity:.14}\n.zone-collab .zone-clone{animation:collabFloat 8.6s ease-in-out infinite;opacity:.14}\n@keyframes profFloat{0%,100%{transform:translate3d(0,0,0);filter:brightness(1)}50%{transform:translate3d(0,-6px,14px);filter:brightness(1.05)}}\n@keyframes postFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(5px,-3px,12px)}}\n@keyframes phdFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-4px,-5px,12px)}}\n@keyframes collabFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(4px,-4px,12px)}}\n\n/* moving scientific lines and dots */\n.zone-line{position:absolute;display:block;border:1px solid rgba(32,143,213,.34);border-radius:50%;pointer-events:none;z-index:4}\n.zone-line.line-a{width:28%;height:18%;right:8%;top:15%;animation:orbitSoft 18s linear infinite}\n.zone-line.line-b{width:18%;height:11%;left:38%;bottom:9%;border-color:rgba(48,190,108,.32);animation:orbitSoftReverse 22s linear infinite}\n.zone-post .line-a{right:15%;top:18%;animation-duration:20s}\n.zone-post .line-b{left:12%;bottom:10%;animation-duration:24s}\n.zone-phd .line-a{right:8%;top:20%;animation-duration:21s}\n.zone-phd .line-b{left:28%;bottom:8%;animation-duration:25s}\n.zone-collab .line-a{right:18%;top:14%;animation-duration:23s}\n.zone-collab .line-b{left:16%;bottom:12%;animation-duration:26s}\n@keyframes orbitSoft{from{transform:rotate(-8deg)}to{transform:rotate(352deg)}}\n@keyframes orbitSoftReverse{from{transform:rotate(10deg)}to{transform:rotate(-350deg)}}\n.zone-dot{position:absolute;width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#45d68c,#3fa3eb);box-shadow:0 0 14px rgba(50,160,220,.45);z-index:5;pointer-events:none;animation:dotPulse 4s ease-in-out infinite}\n.zone-prof .dot-a{right:29%;top:20%}.zone-post .dot-a{right:24%;top:28%}.zone-phd .dot-a{right:15%;top:27%}.zone-collab .dot-a{right:32%;top:22%}\n@keyframes dotPulse{0%,100%{transform:scale(.9);opacity:.55}50%{transform:scale(1.25);opacity:1}}\n\n/* hover depth only inside hovered category */\n.team-zone{transition:filter .2s ease}\n.team-zone:hover{filter:brightness(1.012)}\n@media(max-width:800px){.zone-clone{opacity:.08!important}.zone-line{opacity:.45}.zone-dot{opacity:.7}}\n@media(prefers-reduced-motion:reduce){.zone-clone,.zone-line,.zone-dot{animation:none!important}}\n</style>\n
+
+<style>
+/* ===== EQUIPO COMPLETO: UNA SOLA IMAGEN LARGA + ANIMACION REAL POR SECCIONES ===== */
+.team-long-section{width:100%;margin:0;padding:0;background:#f4f9fc;overflow:hidden}
+.team-long-stage{position:relative;width:100%;overflow:hidden;isolation:isolate;background:#f4f9fc}
+.team-long-base{display:block;width:100%;height:auto;position:relative;z-index:1}
+.team-zone{position:absolute;left:0;right:0;z-index:3;pointer-events:auto;overflow:hidden;perspective:1400px}
+.zone-prof{top:0;height:31%}
+.zone-post{top:31%;height:23%}
+.zone-phd{top:54%;height:22%}
+.zone-collab{top:76%;height:24%}
+.zone-clone{position:absolute;left:0;width:100%;height:100%;top:0;background-image:var(--team-art);background-size:100% auto;background-repeat:no-repeat;pointer-events:none;will-change:transform,filter,opacity}
+.zone-prof .zone-clone{background-position:center 0%}
+.zone-post .zone-clone{background-position:center 31%}
+.zone-phd .zone-clone{background-position:center 54%}
+.zone-collab .zone-clone{background-position:center 76%}
+.team-long-stage{--team-art:url("assets/img_003.png")}
+
+/* subtle but visible section-specific motion */
+.zone-prof .zone-clone{animation:profFloat 7s ease-in-out infinite;opacity:.16}
+.zone-post .zone-clone{animation:postFloat 8s ease-in-out infinite;opacity:.15}
+.zone-phd .zone-clone{animation:phdFloat 7.6s ease-in-out infinite;opacity:.14}
+.zone-collab .zone-clone{animation:collabFloat 8.6s ease-in-out infinite;opacity:.14}
+@keyframes profFloat{0%,100%{transform:translate3d(0,0,0);filter:brightness(1)}50%{transform:translate3d(0,-6px,14px);filter:brightness(1.05)}}
+@keyframes postFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(5px,-3px,12px)}}
+@keyframes phdFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-4px,-5px,12px)}}
+@keyframes collabFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(4px,-4px,12px)}}
+
+/* moving scientific lines and dots */
+.zone-line{position:absolute;display:block;border:1px solid rgba(32,143,213,.34);border-radius:50%;pointer-events:none;z-index:4}
+.zone-line.line-a{width:28%;height:18%;right:8%;top:15%;animation:orbitSoft 18s linear infinite}
+.zone-line.line-b{width:18%;height:11%;left:38%;bottom:9%;border-color:rgba(48,190,108,.32);animation:orbitSoftReverse 22s linear infinite}
+.zone-post .line-a{right:15%;top:18%;animation-duration:20s}
+.zone-post .line-b{left:12%;bottom:10%;animation-duration:24s}
+.zone-phd .line-a{right:8%;top:20%;animation-duration:21s}
+.zone-phd .line-b{left:28%;bottom:8%;animation-duration:25s}
+.zone-collab .line-a{right:18%;top:14%;animation-duration:23s}
+.zone-collab .line-b{left:16%;bottom:12%;animation-duration:26s}
+@keyframes orbitSoft{from{transform:rotate(-8deg)}to{transform:rotate(352deg)}}
+@keyframes orbitSoftReverse{from{transform:rotate(10deg)}to{transform:rotate(-350deg)}}
+.zone-dot{position:absolute;width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#45d68c,#3fa3eb);box-shadow:0 0 14px rgba(50,160,220,.45);z-index:5;pointer-events:none;animation:dotPulse 4s ease-in-out infinite}
+.zone-prof .dot-a{right:29%;top:20%}.zone-post .dot-a{right:24%;top:28%}.zone-phd .dot-a{right:15%;top:27%}.zone-collab .dot-a{right:32%;top:22%}
+@keyframes dotPulse{0%,100%{transform:scale(.9);opacity:.55}50%{transform:scale(1.25);opacity:1}}
+
+/* hover depth only inside hovered category */
+.team-zone{transition:filter .2s ease}
+.team-zone:hover{filter:brightness(1.012)}
+@media(max-width:800px){.zone-clone{opacity:.08!important}.zone-line{opacity:.45}.zone-dot{opacity:.7}}
+@media(prefers-reduced-motion:reduce){.zone-clone,.zone-line,.zone-dot{animation:none!important}}
+</style>
+
 
 <style>
 /* ===== FIX: TEAM PAGE FULL-WIDTH + 4K ARTWORK ===== */
@@ -1367,13 +1417,358 @@ body:not(.team-mode) #team-page{
 }
 </style>
 
+
+<style>
+/* ===== BARRA DE ANUNCIO CEPIMA — RESTAURADA ===== */
+.cepima-announcement{
+  position:relative;
+  width:100%;
+  height:96px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  background:
+    linear-gradient(90deg,#071f39 0%,#0b4f88 38%,#1189c9 68%,#22b977 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    inset 0 -1px 0 rgba(0,0,0,.10),
+    0 16px 38px rgba(8,55,88,.13);
+  z-index:12;
+}
+.cepima-announcement::before,
+.cepima-announcement::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:110px;
+  z-index:3;
+  pointer-events:none;
+}
+.cepima-announcement::before{
+  left:0;
+  background:linear-gradient(90deg,#071f39 10%,transparent);
+}
+.cepima-announcement::after{
+  right:0;
+  background:linear-gradient(270deg,#22b977 10%,transparent);
+}
+.announcement-track{
+  display:flex;
+  align-items:center;
+  width:max-content;
+  min-width:200%;
+  animation:cepimaTicker 30s linear infinite;
+  will-change:transform;
+}
+.cepima-announcement:hover .announcement-track{
+  animation-play-state:paused;
+}
+.announcement-set{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+}
+.announcement-item{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+  padding:0 42px;
+  white-space:nowrap;
+  color:#fff;
+  font-size:18px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  text-shadow:0 1px 12px rgba(0,0,0,.12);
+}
+.announcement-item + .announcement-item::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:50%;
+  width:5px;
+  height:5px;
+  margin-top:-2.5px;
+  border-radius:50%;
+  background:rgba(255,255,255,.74);
+  box-shadow:0 0 14px rgba(255,255,255,.5);
+}
+.announcement-item i{
+  display:inline-grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  font-style:normal;
+  font-size:17px;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.38);
+  background:rgba(255,255,255,.11);
+  backdrop-filter:blur(8px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18);
+}
+@keyframes cepimaTicker{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(-50%,0,0)}
+}
+@media(max-width:760px){
+  .cepima-announcement{height:76px}
+  .announcement-item{
+    padding:0 26px;
+    gap:10px;
+    font-size:14px;
+    letter-spacing:.045em;
+  }
+  .announcement-item i{
+    width:29px;
+    height:29px;
+    font-size:14px;
+  }
+  .cepima-announcement::before,
+  .cepima-announcement::after{width:55px}
+}
+</style>
+
+
+<style>
+/* ===== BARRA DE ANUNCIO — EQUIPO CEPIMA ===== */
+.team-announcement{
+  position:relative;
+  width:100%;
+  height:86px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  background:linear-gradient(90deg,#082447 0%,#0d5ea5 36%,#1596cb 66%,#33c27f 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(0,0,0,.10),0 12px 30px rgba(8,55,88,.11);
+  z-index:20;
+}
+.team-announcement::before,.team-announcement::after{
+  content:"";position:absolute;top:0;bottom:0;width:95px;z-index:3;pointer-events:none;
+}
+.team-announcement::before{left:0;background:linear-gradient(90deg,#082447 12%,transparent)}
+.team-announcement::after{right:0;background:linear-gradient(270deg,#33c27f 12%,transparent)}
+.team-ann-track{
+  display:flex;align-items:center;width:max-content;min-width:200%;
+  animation:teamTicker 31s linear infinite;will-change:transform;
+}
+.team-announcement:hover .team-ann-track{animation-play-state:paused}
+.team-ann-set{display:flex;align-items:center;flex-shrink:0}
+.team-ann-item{
+  position:relative;display:inline-flex;align-items:center;gap:12px;padding:0 38px;white-space:nowrap;
+  color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1;font-weight:800;
+  letter-spacing:.065em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,0,0,.12);
+}
+.team-ann-item + .team-ann-item::before{
+  content:"";position:absolute;left:0;top:50%;width:5px;height:5px;margin-top:-2.5px;border-radius:50%;
+  background:rgba(255,255,255,.82);box-shadow:0 0 13px rgba(255,255,255,.48);
+}
+.team-ann-item i{
+  display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;font-style:normal;font-size:15px;
+  color:#fff;border:1px solid rgba(255,255,255,.40);background:rgba(255,255,255,.12);
+  backdrop-filter:blur(7px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18);
+}
+@keyframes teamTicker{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@media(max-width:760px){
+  .team-announcement{height:70px}
+  .team-ann-item{padding:0 24px;gap:9px;font-size:13px;letter-spacing:.045em}
+  .team-ann-item i{width:27px;height:27px;font-size:13px}
+  .team-announcement::before,.team-announcement::after{width:48px}
+}
+</style>
+
+
+<style>
+/* AJUSTE EXCLUSIVO DE EQUIPO: elimina cualquier boton de menu duplicado dentro de la seccion,
+   sin tocar el menu global #menuBtn que funciona en toda la pagina. */
+#team-page .team-menu-btn,
+#team-page .local-menu-btn,
+#team-page .section-menu-btn,
+#team-page .menu-btn:not(#menuBtn){
+  display:none !important;
+}
+</style>
+
+<style>
+/* =========================================================
+   PAGINAS INDEPENDIENTES CEPIMA — AÑADIDAS SIN MODIFICAR HOME/EQUIPO
+   ========================================================= */
+.cp-page{display:none;min-height:100vh;background:#f3f8fc;color:#0a2036;position:relative;overflow:hidden}
+.cp-page.active{display:block}
+body.cp-page-mode > section:not(.cp-page),
+body.cp-page-mode > footer{display:none!important}
+body.cp-page-mode .cp-page.active{display:block!important}
+.cp-page *{box-sizing:border-box}
+.cp-page .cp-wrap{width:min(1240px,calc(100% - 48px));margin:0 auto;position:relative;z-index:2}
+.cp-page .cp-topbar{height:78px;display:flex;align-items:center;padding:0 24px;background:rgba(247,251,254,.86);border-bottom:1px solid rgba(18,72,130,.08);backdrop-filter:blur(14px);position:relative;z-index:4}
+.cp-page .cp-back{border:1px solid rgba(21,88,156,.12);background:#fff;color:#0d3158;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer;box-shadow:0 10px 30px rgba(14,67,124,.08);transition:.25s ease}
+.cp-page .cp-back:hover{transform:translateY(-2px);box-shadow:0 16px 35px rgba(14,67,124,.13)}
+.cp-page .cp-hero{min-height:720px;display:grid;align-items:center;position:relative;overflow:hidden;padding:72px 0 58px;background:
+radial-gradient(circle at 82% 24%,rgba(47,210,107,.13),transparent 24%),
+radial-gradient(circle at 68% 66%,rgba(35,150,255,.13),transparent 30%),
+linear-gradient(180deg,#f7fbff 0%,#eef6fb 100%)}
+.cp-page .cp-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(18,79,141,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(18,79,141,.04) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(180deg,transparent,rgba(0,0,0,.75) 18%,rgba(0,0,0,.45) 82%,transparent)}
+.cp-page .cp-hero::after{content:"";position:absolute;width:560px;height:560px;border-radius:50%;right:-160px;top:80px;border:1px solid rgba(31,121,230,.12);box-shadow:0 0 0 50px rgba(33,171,255,.035),0 0 0 100px rgba(41,211,107,.028);animation:cpOrbit 9s ease-in-out infinite alternate}
+@keyframes cpOrbit{to{transform:translate(-24px,18px) rotate(8deg)}}
+.cp-page .cp-hero-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.cp-page .cp-label{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid rgba(16,86,154,.12);font-size:12px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:#5a7697;box-shadow:0 10px 25px rgba(16,71,126,.06)}
+.cp-page .cp-title{font-size:clamp(48px,6vw,84px);line-height:.94;letter-spacing:-.055em;margin:20px 0 18px;max-width:800px}
+.cp-page .cp-title em{font-style:normal;color:#1478ff}
+.cp-page .cp-lead{font-size:20px;line-height:1.62;color:#526f90;max-width:700px;margin:0}
+.cp-page .cp-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.cp-page .cp-pill{padding:11px 15px;border-radius:999px;background:#fff;border:1px solid rgba(16,86,154,.1);font-weight:800;color:#3d6187;box-shadow:0 10px 25px rgba(10,56,108,.06)}
+.cp-page .cp-scene{min-height:540px;position:relative;perspective:1500px;transform-style:preserve-3d}
+.cp-page .cp-core{position:absolute;width:290px;height:290px;border-radius:50%;right:88px;top:55px;background:radial-gradient(circle at 30% 28%,#fff 0%,#d9f7ff 16%,#70c7ff 43%,#1d7cff 72%,#1258c5 100%);box-shadow:inset 0 0 45px rgba(255,255,255,.4),0 35px 70px rgba(21,102,190,.24);animation:cpFloat 6s ease-in-out infinite alternate}
+.cp-page .cp-core::after{content:"";position:absolute;inset:34px;border-radius:50%;border:1px solid rgba(255,255,255,.45);box-shadow:0 0 0 26px rgba(255,255,255,.08)}
+.cp-page .cp-ring{position:absolute;width:360px;height:360px;border-radius:50%;right:52px;top:20px;border:1px solid rgba(48,188,255,.28);transform:rotateX(68deg) rotateZ(-18deg);box-shadow:0 0 30px rgba(48,188,255,.12)}
+.cp-page .cp-ring.r2{width:430px;height:430px;right:12px;top:-16px;opacity:.58;transform:rotateX(68deg) rotateZ(18deg)}
+.cp-page .cp-mini-orb{position:absolute;border-radius:50%;box-shadow:0 20px 45px rgba(14,78,148,.17);animation:cpFloat 5s ease-in-out infinite alternate}
+.cp-page .cp-mini-orb.o1{width:110px;height:110px;left:18px;top:78px;background:radial-gradient(circle at 32% 30%,#fff,#caffda 24%,#48d777 72%,#24b55b)}
+.cp-page .cp-mini-orb.o2{width:82px;height:82px;right:20px;bottom:110px;background:radial-gradient(circle at 32% 30%,#fff,#d8eaff 24%,#6bb2ff 72%,#2171e5);animation-delay:.8s}
+@keyframes cpFloat{to{transform:translateY(-16px) rotate(4deg)}}
+.cp-page .cp-float-card{position:absolute;padding:17px 18px;border-radius:22px;background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.9);backdrop-filter:blur(14px);box-shadow:0 18px 50px rgba(13,63,118,.13);max-width:235px;transform-style:preserve-3d;transition:.2s ease}
+.cp-page .cp-float-card:hover{transform:translateY(-7px) rotateY(6deg)}
+.cp-page .cp-float-card b{display:block;font-size:16px;margin-bottom:5px}
+.cp-page .cp-float-card span{display:block;font-size:13px;line-height:1.45;color:#5f7795}
+.cp-page .cp-float-card.f1{left:0;top:26px}
+.cp-page .cp-float-card.f2{left:20px;bottom:66px}
+.cp-page .cp-float-card.f3{right:0;top:295px}
+.cp-page .cp-metric{position:absolute;left:58px;right:22px;bottom:4px;padding:15px;border-radius:26px;background:rgba(255,255,255,.89);border:1px solid rgba(255,255,255,.94);box-shadow:0 24px 60px rgba(12,64,119,.13);display:grid;grid-template-columns:repeat(3,1fr);backdrop-filter:blur(16px)}
+.cp-page .cp-metric div{padding:10px 14px;border-right:1px solid rgba(16,86,154,.1)}
+.cp-page .cp-metric div:last-child{border-right:none}
+.cp-page .cp-metric strong{display:block;font-size:24px;letter-spacing:-.04em;color:#0c2b50;margin-bottom:4px}
+.cp-page .cp-metric span{font-size:12px;line-height:1.4;color:#69819d}
+.cp-page .cp-ticker{height:72px;overflow:hidden;background:linear-gradient(90deg,#082b52,#0f67c8 38%,#19a6db 70%,#21c76b);position:relative;display:flex;align-items:center;box-shadow:0 16px 38px rgba(8,55,88,.12)}
+.cp-page .cp-ticker::before,.cp-page .cp-ticker::after{content:"";position:absolute;top:0;bottom:0;width:86px;z-index:2;pointer-events:none}
+.cp-page .cp-ticker::before{left:0;background:linear-gradient(90deg,#082b52,transparent)}
+.cp-page .cp-ticker::after{right:0;background:linear-gradient(270deg,#21c76b,transparent)}
+.cp-page .cp-track{display:flex;width:max-content;min-width:200%;animation:cpTicker 30s linear infinite}
+.cp-page .cp-set{display:flex;align-items:center;flex-shrink:0}
+.cp-page .cp-item{position:relative;display:inline-flex;align-items:center;gap:11px;padding:0 34px;white-space:nowrap;color:#fff;font-size:14px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.cp-page .cp-item + .cp-item::before{content:"";position:absolute;left:0;top:50%;width:5px;height:5px;border-radius:50%;background:#fff;transform:translateY(-50%);opacity:.8}
+.cp-page .cp-item i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.34);background:rgba(255,255,255,.12)}
+@keyframes cpTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.cp-page .cp-section{padding:92px 0;position:relative}
+.cp-page .cp-section.cp-soft{background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(237,246,252,.72))}
+.cp-page .cp-head{max-width:850px;margin-bottom:38px}
+.cp-page .cp-head h2{font-size:clamp(36px,4.2vw,62px);line-height:.98;letter-spacing:-.045em;margin:16px 0 12px}
+.cp-page .cp-head p{font-size:18px;line-height:1.65;color:#587391;margin:0}
+.cp-page .cp-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.cp-page .cp-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.cp-page .cp-card{position:relative;padding:28px;border-radius:28px;background:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.94);box-shadow:0 18px 46px rgba(11,62,116,.09);overflow:hidden;transform-style:preserve-3d;transition:transform .2s ease,box-shadow .2s ease}
+.cp-page .cp-card::after{content:"";position:absolute;right:-45px;top:-45px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(50,194,255,.20),transparent 70%)}
+.cp-page .cp-card:hover{transform:translateY(-7px) rotateX(1.5deg) rotateY(-1.5deg);box-shadow:0 28px 68px rgba(11,62,116,.14)}
+.cp-page .cp-num{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,rgba(20,120,255,.15),rgba(34,205,105,.14));display:grid;place-items:center;color:#176fdc;font-weight:900;margin-bottom:18px;border:1px solid rgba(20,100,180,.08)}
+.cp-page .cp-card h3{font-size:27px;line-height:1.05;letter-spacing:-.035em;margin:0 0 10px}
+.cp-page .cp-card p{font-size:16px;line-height:1.65;color:#5a7594;margin:0}
+.cp-page .cp-card ul{padding:0;margin:18px 0 0;list-style:none;display:grid;gap:10px}
+.cp-page .cp-card li{position:relative;padding-left:20px;color:#587391;line-height:1.5}
+.cp-page .cp-card li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#1677ff,#37cf72);box-shadow:0 0 0 6px rgba(22,119,255,.06)}
+.cp-page .cp-split{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:start}
+.cp-page .cp-panel{padding:32px;border-radius:30px;background:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.95);box-shadow:0 22px 60px rgba(10,58,112,.1)}
+.cp-page .cp-steps{display:grid;gap:16px}
+.cp-page .cp-step{display:grid;grid-template-columns:62px 1fr;gap:16px;align-items:start}
+.cp-page .cp-step b:first-child{width:62px;height:62px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(20,120,255,.15),rgba(34,205,105,.14));color:#136bd6;font-size:20px}
+.cp-page .cp-step h4{font-size:21px;margin:4px 0 6px;letter-spacing:-.025em}
+.cp-page .cp-step p{margin:0;color:#5a7594;line-height:1.55}
+.cp-page .cp-stack{min-height:490px;position:relative;perspective:1400px}
+.cp-page .cp-sheet{position:absolute;width:min(92%,430px);padding:24px;border-radius:28px;background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.96);box-shadow:0 25px 65px rgba(10,58,112,.13);backdrop-filter:blur(15px);transition:.25s ease}
+.cp-page .cp-sheet:hover{transform:translateY(-8px) rotate(0deg)!important}
+.cp-page .cp-sheet.s1{left:0;top:0;transform:rotate(-6deg)}
+.cp-page .cp-sheet.s2{right:0;top:98px;transform:rotate(6deg)}
+.cp-page .cp-sheet.s3{left:42px;bottom:4px;transform:rotate(-2deg)}
+.cp-page .cp-sheet strong{display:block;margin-bottom:14px;font-size:16px}
+.cp-page .cp-tags{display:flex;flex-wrap:wrap;gap:9px}
+.cp-page .cp-tags span{padding:9px 11px;border-radius:999px;background:#f2f7fd;border:1px solid rgba(16,86,154,.09);font-size:13px;font-weight:800;color:#4e6d8d}
+.cp-page .cp-bars{height:140px;display:grid;grid-template-columns:repeat(5,1fr);align-items:end;gap:10px}
+.cp-page .cp-bars i{display:block;border-radius:12px 12px 5px 5px;background:linear-gradient(180deg,#62d7ff,#1677ff)}
+.cp-page .cp-bars i:nth-child(1){height:38%}.cp-page .cp-bars i:nth-child(2){height:62%}.cp-page .cp-bars i:nth-child(3){height:82%}.cp-page .cp-bars i:nth-child(4){height:68%}.cp-page .cp-bars i:nth-child(5){height:94%}
+.cp-page .cp-lines{display:grid;gap:11px}.cp-page .cp-lines i{height:13px;border-radius:999px;background:linear-gradient(90deg,rgba(16,86,154,.14),rgba(16,86,154,.05))}.cp-page .cp-lines i:nth-child(2){width:76%}.cp-page .cp-lines i:nth-child(3){width:88%}.cp-page .cp-lines i:nth-child(4){width:59%}
+.cp-page .cp-closing{padding:84px 0;background:linear-gradient(135deg,#0c2f59,#0b5da9 55%,#19aa74);color:#fff;position:relative;overflow:hidden}
+.cp-page .cp-closing::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 40%,rgba(82,209,255,.18),transparent 25%),radial-gradient(circle at 84% 28%,rgba(55,228,117,.18),transparent 25%)}
+.cp-page .cp-closing h3{position:relative;z-index:1;font-size:clamp(38px,5vw,68px);line-height:.98;letter-spacing:-.045em;max-width:960px;margin:0}
+.cp-page .cp-closing p{position:relative;z-index:1;font-size:18px;line-height:1.65;color:rgba(255,255,255,.8);max-width:760px;margin:18px 0 0}
+@media(max-width:980px){.cp-page .cp-hero-layout,.cp-page .cp-split{grid-template-columns:1fr}.cp-page .cp-scene{min-height:520px}.cp-page .cp-grid-3{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.cp-page .cp-wrap{width:calc(100% - 28px)}.cp-page .cp-topbar{padding:0 14px}.cp-page .cp-hero{padding-top:46px;min-height:auto}.cp-page .cp-title{font-size:44px}.cp-page .cp-lead{font-size:17px}.cp-page .cp-grid-2,.cp-page .cp-grid-3{grid-template-columns:1fr}.cp-page .cp-scene{min-height:450px}.cp-page .cp-core{width:220px;height:220px;right:34px}.cp-page .cp-ring{width:270px;height:270px;right:10px}.cp-page .cp-ring.r2{width:320px;height:320px}.cp-page .cp-float-card{max-width:185px;padding:13px}.cp-page .cp-metric{left:10px;right:10px;grid-template-columns:1fr 1fr}.cp-page .cp-metric div:nth-child(2){border-right:none}.cp-page .cp-item{padding:0 20px;font-size:12px}.cp-page .cp-section{padding:70px 0}.cp-page .cp-stack{min-height:430px}}
+</style>
+
+
+<style>
+/* =========================================================
+   PAGINAS CEPIMA 2026 — IDENTIDAD VISUAL UNICA POR SECCION
+   Solo afecta .cp-page. Home y Equipo quedan intactos.
+   ========================================================= */
+.cp-page{--p-blue:#1677ff;--p-cyan:#42d4ff;--p-green:#27cb71;--p-ink:#0a2343;--p-soft:#577391;--p-line:rgba(20,83,150,.12);font-family:Arial,Helvetica,sans-serif}
+.cp-page .u-wrap{width:min(1240px,calc(100% - 48px));margin:0 auto;position:relative;z-index:3}
+.cp-page .u-top{height:78px;display:flex;align-items:center;padding:0 24px;background:rgba(248,252,255,.88);border-bottom:1px solid var(--p-line);backdrop-filter:blur(14px);position:relative;z-index:40}
+.cp-page .u-back{border:1px solid var(--p-line);background:#fff;color:#12375d;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer;box-shadow:0 10px 28px rgba(9,56,108,.08)}
+.cp-page .u-kicker{font-size:12px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:#5e7c9d;margin-bottom:16px;display:inline-flex;align-items:center;gap:8px}
+.cp-page .u-title{font-size:clamp(46px,6vw,84px);line-height:.95;letter-spacing:-.055em;margin:0 0 18px;color:var(--p-ink)}
+.cp-page .u-lead{font-size:19px;line-height:1.62;color:var(--p-soft);margin:0;max-width:720px}
+.cp-page .u-chiprow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.cp-page .u-chip{padding:10px 14px;border-radius:999px;background:#fff;border:1px solid var(--p-line);color:#426589;font-weight:800;font-size:14px;box-shadow:0 9px 24px rgba(9,58,112,.06)}
+.cp-page .u-section{padding:86px 0}.cp-page .u-section.soft{background:linear-gradient(180deg,rgba(255,255,255,.48),rgba(239,247,252,.78))}
+.cp-page .u-head{max-width:820px;margin-bottom:32px}.cp-page .u-head h2{font-size:clamp(34px,4vw,58px);line-height:1;letter-spacing:-.045em;margin:10px 0 12px;color:var(--p-ink)}.cp-page .u-head p{font-size:18px;line-height:1.6;color:var(--p-soft);margin:0}
+.cp-page .u-grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.cp-page .u-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.cp-page .u-grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.cp-page .u-card{position:relative;padding:26px;border-radius:28px;background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.96);box-shadow:0 18px 48px rgba(10,61,112,.10);overflow:hidden}.cp-page .u-card h3{font-size:25px;letter-spacing:-.035em;margin:0 0 10px}.cp-page .u-card p{margin:0;color:var(--p-soft);line-height:1.58}.cp-page .u-card .num{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(22,119,255,.14),rgba(39,203,113,.13));font-weight:900;color:#1168dc;margin-bottom:18px}
+.cp-page .u-ticker{height:68px;display:flex;align-items:center;overflow:hidden;position:relative}.cp-page .u-ticker-track{display:flex;align-items:center;width:max-content;min-width:200%;animation:uTicker 28s linear infinite}.cp-page .u-ticker-set{display:flex;align-items:center;flex-shrink:0}.cp-page .u-tick{white-space:nowrap;padding:0 30px;color:#fff;font-size:14px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}.cp-page .u-tick::before{content:'✦';margin-right:10px;opacity:.8}@keyframes uTicker{to{transform:translateX(-50%)}}
+.cp-page .u-footer{position:relative;overflow:hidden;color:white;padding:64px 0 28px}.cp-page .u-footer-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:end}.cp-page .u-footer h3{font-size:clamp(34px,4.4vw,62px);line-height:.98;letter-spacing:-.045em;margin:10px 0 14px}.cp-page .u-footer p{color:rgba(255,255,255,.76);font-size:16px;line-height:1.7;max-width:720px}.cp-page .u-footer-links{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.cp-page .u-footer-link{padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-weight:800}.cp-page .u-footer-bottom{margin-top:32px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.58)}
+
+/* ---------- SOBRE NOSOTROS: red orbital / identidad ---------- */
+#about-page{background:#f4f9fd}
+#about-page .about-hero{min-height:760px;padding:76px 0 64px;position:relative;overflow:hidden;background:radial-gradient(circle at 82% 22%,rgba(56,216,134,.16),transparent 28%),radial-gradient(circle at 22% 38%,rgba(50,168,255,.13),transparent 32%),linear-gradient(145deg,#f8fcff,#edf7fb)}
+#about-page .about-layout{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center}
+#about-page .about-map{position:relative;min-height:560px;perspective:1300px}
+#about-page .about-sphere{position:absolute;width:290px;height:290px;border-radius:50%;right:100px;top:100px;background:radial-gradient(circle at 30% 25%,#fff,#caf8e0 20%,#60db9c 48%,#1285d8 100%);box-shadow:inset -24px -26px 55px rgba(6,66,128,.23),0 34px 72px rgba(11,89,153,.22);animation:aboutSphere 6.5s ease-in-out infinite alternate}
+#about-page .about-orbit{position:absolute;border:1px solid rgba(15,119,213,.28);border-radius:50%;right:48px;top:48px;width:390px;height:390px;transform:rotateX(63deg) rotateZ(-18deg);animation:aboutOrbit 16s linear infinite}#about-page .about-orbit.o2{width:470px;height:470px;right:8px;top:8px;transform:rotateX(63deg) rotateZ(28deg);animation-duration:22s;animation-direction:reverse}
+#about-page .about-node{position:absolute;padding:16px 18px;border-radius:20px;background:rgba(255,255,255,.86);border:1px solid #fff;box-shadow:0 18px 46px rgba(8,59,112,.13);backdrop-filter:blur(12px);max-width:220px}#about-page .about-node b{display:block;margin-bottom:5px}#about-page .about-node span{font-size:13px;line-height:1.4;color:#5f7897}.about-node.n1{left:0;top:36px}.about-node.n2{left:20px;bottom:100px}.about-node.n3{right:0;bottom:34px}
+@keyframes aboutSphere{to{transform:translateY(-14px) rotate(3deg)}}@keyframes aboutOrbit{to{transform:rotateX(63deg) rotateZ(342deg)}}
+#about-page .u-ticker{background:linear-gradient(90deg,#0b3d75,#1072b8,#2ec47b)}
+#about-page .about-principles .u-card:nth-child(1){transform:translateY(0)}#about-page .about-principles .u-card:nth-child(2){transform:translateY(26px)}#about-page .about-principles .u-card:nth-child(3){transform:translateY(8px)}
+#about-page .about-path{display:grid;grid-template-columns:110px 1fr;gap:18px}.about-path .rail{position:relative}.about-path .rail::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(#1677ff,#27cb71)}.about-step{display:grid;grid-template-columns:70px 1fr;gap:18px;margin-bottom:18px}.about-step>b{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid var(--p-line);box-shadow:0 12px 28px rgba(10,64,120,.09);z-index:1}.about-step h4{margin:0 0 6px;font-size:22px}.about-step p{margin:0;color:var(--p-soft);line-height:1.55}
+#about-page .u-footer{background:radial-gradient(circle at 80% 20%,rgba(50,214,124,.26),transparent 28%),linear-gradient(135deg,#062845,#0c5681 58%,#1d9a69)}
+
+/* ---------- INVESTIGACION: laboratorio de datos / escáner ---------- */
+#research-page{background:#f4f8fd}
+#research-page .research-hero{min-height:770px;padding:76px 0 64px;background:linear-gradient(180deg,#061d36 0%,#0a3153 50%,#0e4968 100%);color:#fff;position:relative;overflow:hidden}
+#research-page .research-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(88,205,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(88,205,255,.08) 1px,transparent 1px);background-size:40px 40px;mask-image:linear-gradient(180deg,transparent,#000 15%,#000 85%,transparent)}
+#research-page .research-layout{display:grid;grid-template-columns:.92fr 1.08fr;gap:46px;align-items:center}#research-page .u-title,#research-page .u-lead{color:#fff}#research-page .u-lead{color:rgba(230,244,255,.76)}#research-page .u-kicker{color:#85cfff}
+#research-page .research-console{position:relative;min-height:560px;border-radius:34px;background:rgba(5,24,45,.55);border:1px solid rgba(111,212,255,.18);box-shadow:0 30px 80px rgba(0,0,0,.28);backdrop-filter:blur(14px);overflow:hidden;padding:24px}
+#research-page .scanner{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#54e5ff,transparent);box-shadow:0 0 18px #54e5ff;animation:researchScan 4.8s ease-in-out infinite alternate}.scan-grid{position:absolute;inset:0;background-image:radial-gradient(circle at center,rgba(67,213,255,.14) 1px,transparent 1.5px);background-size:18px 18px;opacity:.7}.research-cell{position:absolute;border-radius:24px;background:linear-gradient(145deg,rgba(11,60,93,.82),rgba(6,33,58,.72));border:1px solid rgba(82,205,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}.research-cell.c1{left:28px;top:34px;width:44%;height:190px}.research-cell.c2{right:28px;top:34px;width:43%;height:265px}.research-cell.c3{left:28px;bottom:32px;width:58%;height:242px}.research-cell.c4{right:28px;bottom:32px;width:29%;height:166px}.research-cell .rc-label{padding:16px;color:#78d7ff;font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:900}.pulse-graph{height:110px;margin:12px 18px 0;border-radius:18px;background:linear-gradient(180deg,rgba(31,174,255,.08),transparent);position:relative;overflow:hidden}.pulse-graph::before{content:'';position:absolute;left:-10%;top:50%;width:120%;height:2px;background:linear-gradient(90deg,transparent,#37deff,#2edb8b,#37deff,transparent);transform:skewY(-13deg);box-shadow:0 0 14px rgba(55,222,255,.7);animation:researchPulse 2.8s ease-in-out infinite}.molecule{width:110px;height:110px;margin:20px auto;position:relative;animation:researchMol 12s linear infinite}.molecule i{position:absolute;width:22px;height:22px;border-radius:50%;background:#48dfff;box-shadow:0 0 18px rgba(72,223,255,.55)}.molecule i:nth-child(1){left:44px;top:10px}.molecule i:nth-child(2){left:8px;top:60px;background:#36d57f}.molecule i:nth-child(3){right:8px;top:60px}.molecule::before,.molecule::after{content:'';position:absolute;width:74px;height:2px;background:#6acff6;left:18px;top:55px}.molecule::before{transform:rotate(55deg)}.molecule::after{transform:rotate(-55deg)}
+@keyframes researchScan{from{top:24px}to{top:520px}}@keyframes researchPulse{50%{transform:translateX(30px) skewY(8deg)}}@keyframes researchMol{to{transform:rotate(360deg)}}
+#research-page .u-ticker{background:#061f38;border-top:1px solid rgba(76,202,255,.18);border-bottom:1px solid rgba(76,202,255,.18)}
+#research-page .research-lines .u-card{background:linear-gradient(160deg,#fff,#f2f9ff)}#research-page .research-lines .u-card::after{content:'';position:absolute;right:-35px;bottom:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(39,203,113,.15),transparent 70%)}
+#research-page .u-footer{background:linear-gradient(135deg,#031425,#082b4a 55%,#0e5e68)}
+
+/* ---------- PROYECTOS: tarjetas flotantes tipo dossier ---------- */
+#projects-page{background:#f7fafc}
+#projects-page .projects-hero{min-height:760px;padding:76px 0 64px;position:relative;overflow:hidden;background:linear-gradient(135deg,#f7fbff 0%,#eef8f1 56%,#eaf5ff 100%)}
+#projects-page .projects-layout{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}.project-board{position:relative;min-height:570px;perspective:1600px}.project-ticket{position:absolute;width:300px;padding:22px;border-radius:28px;background:#fff;border:1px solid rgba(15,89,154,.1);box-shadow:0 25px 65px rgba(10,62,112,.14);transform-style:preserve-3d;transition:transform .35s ease}.project-ticket strong{display:block;font-size:26px;margin-bottom:7px}.project-ticket span{color:#5d7896;line-height:1.5;font-size:14px}.project-ticket.t1{left:10px;top:30px;transform:rotate(-7deg)}.project-ticket.t2{right:12px;top:82px;transform:rotate(7deg)}.project-ticket.t3{left:92px;bottom:30px;transform:rotate(-2deg)}.project-ticket:hover{transform:translateY(-10px) rotate(0deg) scale(1.03)}.project-ticket .bar{height:7px;border-radius:999px;margin-bottom:18px;background:linear-gradient(90deg,#1976ff,#31d072)}.project-board::before{content:'';position:absolute;inset:58px 50px;border-radius:42px;border:1px dashed rgba(17,112,190,.22);animation:projectBorder 8s ease-in-out infinite alternate}.project-board::after{content:'';position:absolute;width:230px;height:230px;border-radius:50%;right:95px;bottom:90px;background:radial-gradient(circle at 30% 25%,#fff,#d8f8e4 18%,#71e29f 46%,#157ec7);filter:blur(.2px);z-index:-1;animation:projectOrb 5.4s ease-in-out infinite alternate}@keyframes projectBorder{to{transform:scale(1.03) rotate(2deg)}}@keyframes projectOrb{to{transform:translateY(-14px)}}
+#projects-page .u-ticker{background:linear-gradient(90deg,#11315e,#156bb5,#1bb0aa,#2fc76e)}
+#projects-page .project-impact{display:grid;grid-template-columns:1.2fr .8fr;gap:24px}.impact-big{min-height:420px;border-radius:34px;padding:34px;background:linear-gradient(145deg,#092d53,#0f5d84);color:#fff;position:relative;overflow:hidden}.impact-big::after{content:'';position:absolute;width:330px;height:330px;border-radius:50%;right:-80px;bottom:-120px;background:radial-gradient(circle,rgba(50,218,132,.42),transparent 65%)}.impact-big h3{font-size:clamp(34px,4vw,54px);margin:0 0 14px;letter-spacing:-.04em}.impact-big p{max-width:620px;color:rgba(255,255,255,.75);line-height:1.65}.impact-stack{display:grid;gap:18px}
+#projects-page .u-footer{background:radial-gradient(circle at 20% 10%,rgba(39,203,113,.22),transparent 28%),linear-gradient(135deg,#0b2d49,#0d4166 48%,#0d6b5b)}
+
+/* ---------- PUBLICACIONES: biblioteca / hojas 3D ---------- */
+#publications-page{background:#f7f8fb}
+#publications-page .pub-hero{min-height:760px;padding:76px 0 64px;background:linear-gradient(155deg,#fdfdff,#f3f6fb 55%,#edf6ff);position:relative;overflow:hidden}.pub-layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:54px;align-items:center}.pub-library{position:relative;min-height:570px;perspective:1500px}.pub-sheet{position:absolute;width:360px;height:470px;border-radius:28px;background:linear-gradient(180deg,#fff,#f7f9fc);border:1px solid rgba(20,79,140,.1);box-shadow:0 26px 68px rgba(8,57,109,.13);padding:26px;transform-style:preserve-3d}.pub-sheet.s1{left:30px;top:44px;transform:rotateY(14deg) rotateZ(-6deg);animation:pubFloatA 6s ease-in-out infinite alternate}.pub-sheet.s2{right:12px;top:62px;transform:rotateY(-12deg) rotateZ(7deg);animation:pubFloatB 7.2s ease-in-out infinite alternate}.pub-sheet.s3{left:150px;top:20px;z-index:3;transform:translateZ(42px);animation:pubFloatC 5.8s ease-in-out infinite alternate}.pub-sheet .journal{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6a87a6;font-weight:900}.pub-sheet h4{font-size:26px;line-height:1.05;margin:20px 0 12px}.pub-sheet .line{height:11px;border-radius:999px;background:#e8eef5;margin:10px 0}.pub-sheet .line.w80{width:80%}.pub-sheet .line.w65{width:65%}.pub-sheet .cite{margin-top:24px;display:flex;align-items:center;gap:10px;color:#1573e6;font-weight:900}.pub-sheet .cite::before{content:'↗';width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#eaf4ff}.pub-glow{position:absolute;width:280px;height:280px;border-radius:50%;right:80px;bottom:40px;background:radial-gradient(circle,rgba(56,188,255,.22),transparent 70%);filter:blur(4px)}@keyframes pubFloatA{to{transform:translateY(-10px) rotateY(10deg) rotateZ(-4deg)}}@keyframes pubFloatB{to{transform:translateY(12px) rotateY(-8deg) rotateZ(4deg)}}@keyframes pubFloatC{to{transform:translateY(-13px) translateZ(52px)}}
+#publications-page .u-ticker{background:linear-gradient(90deg,#30245c,#3e49a7,#1d84cf,#29b99b)}
+#publications-page .pub-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.pub-metric{padding:28px;border-radius:28px;background:#fff;border:1px solid var(--p-line);box-shadow:0 18px 46px rgba(8,55,105,.09)}.pub-metric strong{display:block;font-size:44px;letter-spacing:-.05em;margin-bottom:8px;color:#254bad}.pub-metric span{color:var(--p-soft);line-height:1.45}
+#publications-page .u-footer{background:radial-gradient(circle at 80% 20%,rgba(75,106,225,.28),transparent 30%),linear-gradient(135deg,#211b45,#293b78 58%,#176d86)}
+
+@media(max-width:980px){#about-page .about-layout,#research-page .research-layout,#projects-page .projects-layout,.pub-layout,.project-impact,.cp-page .u-footer-grid{grid-template-columns:1fr}.cp-page .u-grid4{grid-template-columns:repeat(2,1fr)}.cp-page .u-grid3{grid-template-columns:1fr}.cp-page .u-grid2{grid-template-columns:1fr}.about-map,.research-console,.project-board,.pub-library{min-height:520px}}
+@media(max-width:640px){.cp-page .u-wrap{width:min(100% - 28px,1240px)}.cp-page .u-section{padding:66px 0}.cp-page .u-grid4{grid-template-columns:1fr}.cp-page .u-title{font-size:clamp(40px,12vw,58px)}.cp-page .u-lead{font-size:16px}.cp-page .u-tick{padding:0 18px;font-size:12px}.pub-sheet{width:290px;height:410px}.pub-sheet.s3{left:45px}.project-ticket{width:250px}.project-ticket.t3{left:40px}.cp-page .u-footer-links{grid-template-columns:1fr}}
+</style>
+
 </head>
 <body>
 
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+
 <section class="hero" id="top">
-  <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
 </section>
 
 <div class="menu-overlay" id="menuOverlay"></div>
@@ -1495,24 +1890,28 @@ body:not(.team-mode) #team-page{
   <h3 class="reveal">Transformamos retos ambientales en oportunidades tecnológicas reales.</h3>
 </section>
 
-
-
-
-
-<section class="cepima-extra-banner cepima-3d-banner" id="cepima-extra-banner">
-  <div class="cepima-3d-stage" id="cepima3dStage">
-    <img class="cepima-base-image" src="assets/cepima-image-4.png" alt="CEPIMA — Ciencia e ingeniería para un futuro más sostenible">
-
-    
-    <!-- ÚNICOS ELEMENTOS ANIMADOS: planeta + líneas orbitales -->
-    <div class="cepima-planet-slice" id="cepimaPlanetSlice"></div>
-
-    <div class="cepima-orbit-layer orbit-a"></div>
-    <div class="cepima-orbit-layer orbit-b"></div>
-    <div class="cepima-orbit-layer orbit-c"></div>
-    
+<section class="cepima-announcement" aria-label="Highlights CEPIMA">
+  <div class="announcement-track">
+    <div class="announcement-set">
+      <span class="announcement-item"><i>✦</i> INGENIERÍA QUE TRANSFORMA RETOS EN SOLUCIONES REALES</span>
+      <span class="announcement-item"><i>↗</i> DEL LABORATORIO A LA INDUSTRIA</span>
+      <span class="announcement-item"><i>●</i> CAPTURA DE CO₂ · ECONOMÍA CIRCULAR · AGUA · SIMBIOSIS INDUSTRIAL</span>
+      <span class="announcement-item"><i>⌁</i> MODELADO · OPTIMIZACIÓN · IMPACTO AMBIENTAL</span>
+    </div>
+    <div class="announcement-set" aria-hidden="true">
+      <span class="announcement-item"><i>✦</i> INGENIERÍA QUE TRANSFORMA RETOS EN SOLUCIONES REALES</span>
+      <span class="announcement-item"><i>↗</i> DEL LABORATORIO A LA INDUSTRIA</span>
+      <span class="announcement-item"><i>●</i> CAPTURA DE CO₂ · ECONOMÍA CIRCULAR · AGUA · SIMBIOSIS INDUSTRIAL</span>
+      <span class="announcement-item"><i>⌁</i> MODELADO · OPTIMIZACIÓN · IMPACTO AMBIENTAL</span>
+    </div>
   </div>
 </section>
+
+
+
+
+
+
 
 
 
@@ -1530,13 +1929,15 @@ function toggleMenu(force){
     ? force
     : !panel.classList.contains('open');
 
-  btn.classList.toggle('open',open);
+  if(btn){
+    btn.classList.toggle('open',open);
+    btn.setAttribute('aria-expanded',String(open));
+  }
   panel.classList.toggle('open',open);
   overlay.classList.toggle('open',open);
-  btn.setAttribute('aria-expanded',String(open));
 }
 
-btn.addEventListener('click',()=>toggleMenu());
+if(btn) btn.addEventListener('click',()=>toggleMenu());
 overlay.addEventListener('click',()=>toggleMenu(false));
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape') toggleMenu(false);
@@ -1832,20 +2233,280 @@ if(!reduced) requestAnimationFrame(moveDots);
 
 
 
+
+<style>
+/* =========================================================
+   AJUSTE EXCLUSIVO VISTA EQUIPO: botones ocultos + sección 3D
+   No afecta Home ni otras vistas.
+   ========================================================= */
+body.team-mode .team-hero{
+  position:relative;
+  isolation:isolate;
+}
+/* Los dos botones forman parte de la imagen original. Este parche visual
+   los oculta sin modificar el resto del arte del banner. */
+body.team-mode .team-hero::after{
+  content:"";
+  position:absolute;
+  left:4.35%;
+  top:57.7%;
+  width:20.1%;
+  height:17.4%;
+  z-index:7;
+  pointer-events:none;
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 18% 18%,rgba(255,255,255,.98),rgba(248,252,255,.98) 42%,rgba(242,249,253,.985) 100%);
+  box-shadow:inset 0 0 22px rgba(255,255,255,.55);
+}
+
+.team-vision-2026{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  padding:clamp(68px,8vw,116px) clamp(22px,6vw,84px);
+  color:#082743;
+  background:
+    radial-gradient(circle at 8% 14%,rgba(28,132,216,.13),transparent 31%),
+    radial-gradient(circle at 92% 78%,rgba(37,196,122,.15),transparent 33%),
+    linear-gradient(135deg,#f8fcff 0%,#eef8fd 52%,#f5fff9 100%);
+  border-top:1px solid rgba(18,112,177,.12);
+  border-bottom:1px solid rgba(31,177,112,.14);
+}
+.team-vision-2026::before{
+  content:"";
+  position:absolute;
+  inset:-30% -10%;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(27,113,175,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(27,113,175,.045) 1px,transparent 1px);
+  background-size:52px 52px;
+  transform:perspective(900px) rotateX(67deg) translateY(-5%);
+  transform-origin:center;
+  opacity:.72;
+}
+.team-vision-inner{
+  position:relative;
+  z-index:2;
+  max-width:1280px;
+  margin:0 auto;
+}
+.team-vision-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
+  padding:9px 14px;
+  border:1px solid rgba(18,124,193,.16);
+  border-radius:999px;
+  background:rgba(255,255,255,.74);
+  backdrop-filter:blur(12px);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#177cc0;
+}
+.team-vision-kicker::before{
+  content:"";
+  width:8px;height:8px;border-radius:50%;
+  background:#28c47d;
+  box-shadow:0 0 0 7px rgba(40,196,125,.11);
+}
+.team-vision-head{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);
+  gap:clamp(28px,6vw,90px);
+  align-items:end;
+  margin-bottom:48px;
+}
+.team-vision-head h2{
+  margin:0;
+  max-width:850px;
+  font-size:clamp(40px,5.7vw,82px);
+  line-height:.94;
+  letter-spacing:-.055em;
+  color:#082743;
+}
+.team-vision-head h2 span{
+  background:linear-gradient(90deg,#0f7fd0,#22bd79);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.team-vision-head p{
+  margin:0;
+  font-size:clamp(16px,1.45vw,20px);
+  line-height:1.7;
+  color:#557087;
+}
+.team-vision-stage{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+  perspective:1300px;
+}
+.team-vision-card{
+  --rx:0deg;--ry:0deg;
+  position:relative;
+  min-height:260px;
+  padding:28px 24px 26px;
+  border-radius:28px;
+  border:1px solid rgba(18,111,177,.13);
+  background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(255,255,255,.64));
+  backdrop-filter:blur(18px);
+  box-shadow:0 22px 55px rgba(28,84,121,.11);
+  transform-style:preserve-3d;
+  transform:perspective(950px) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0);
+  transition:transform .18s ease,box-shadow .25s ease,border-color .25s ease;
+  will-change:transform;
+}
+.team-vision-card:hover{
+  border-color:rgba(31,181,117,.32);
+  box-shadow:0 30px 78px rgba(24,92,133,.17);
+}
+.team-vision-card::after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(130deg,rgba(255,255,255,.52),transparent 42%,rgba(33,194,122,.05));
+}
+.vision-number,
+.vision-icon,
+.team-vision-card h3,
+.team-vision-card p{position:relative;z-index:2;transform:translateZ(24px)}
+.vision-number{
+  display:block;
+  margin-bottom:32px;
+  font-size:11px;
+  letter-spacing:.18em;
+  font-weight:800;
+  color:#6d91ab;
+}
+.vision-icon{
+  width:52px;height:52px;
+  display:grid;place-items:center;
+  margin-bottom:24px;
+  border-radius:17px;
+  font-size:23px;
+  color:white;
+  background:linear-gradient(135deg,#0c82d5,#29c27e);
+  box-shadow:0 12px 28px rgba(16,135,198,.22);
+}
+.team-vision-card h3{
+  margin:0 0 12px;
+  font-size:21px;
+  letter-spacing:-.025em;
+  color:#092b49;
+}
+.team-vision-card p{
+  margin:0;
+  color:#607a8f;
+  font-size:14px;
+  line-height:1.65;
+}
+.team-vision-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:28px;
+  margin-top:34px;
+  padding:22px 26px;
+  border-radius:24px;
+  background:linear-gradient(90deg,rgba(9,59,98,.96),rgba(12,112,172,.94) 58%,rgba(31,181,112,.92));
+  color:#fff;
+  box-shadow:0 24px 60px rgba(13,75,117,.18);
+}
+.team-vision-footer strong{font-size:clamp(18px,2vw,25px);letter-spacing:-.02em}
+.team-vision-footer span{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.78;white-space:nowrap}
+@media(max-width:980px){
+  .team-vision-head{grid-template-columns:1fr;align-items:start}
+  .team-vision-stage{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:620px){
+  body.team-mode .team-hero::after{left:4.2%;top:58%;width:21%;height:18%}
+  .team-vision-2026{padding:62px 18px}
+  .team-vision-stage{grid-template-columns:1fr}
+  .team-vision-card{min-height:220px}
+  .team-vision-footer{align-items:flex-start;flex-direction:column}
+  .team-vision-footer span{white-space:normal}
+}
+</style>
+
+
+<!-- =========================================================
+     PAGINAS INDEPENDIENTES ADICIONALES — HOME Y EQUIPO NO CAMBIADOS
+     ========================================================= -->
+<section class="cp-page" id="about-page" data-page="about" aria-label="Sobre nosotros CEPIMA">
+  <div class="u-top"><button class="cp-back u-back" type="button">← Volver</button></div>
+  <section class="about-hero"><div class="u-wrap about-layout"><div><div class="u-kicker">01 · Sobre nosotros</div><h1 class="u-title">Un centro donde la ciencia se convierte en <span style="color:#1682e8">dirección</span>.</h1><p class="u-lead">CEPIMA integra ingeniería de procesos e ingeniería ambiental para diseñar soluciones más eficientes, circulares y sostenibles. Esta página explica quiénes somos, cómo pensamos y qué nos mueve.</p><div class="u-chiprow"><span class="u-chip">Visión sistémica</span><span class="u-chip">Rigor científico</span><span class="u-chip">Transferencia</span></div></div><div class="about-map"><div class="about-orbit"></div><div class="about-orbit o2"></div><div class="about-sphere"></div><div class="about-node n1"><b>Conectar</b><span>Procesos, personas y conocimiento.</span></div><div class="about-node n2"><b>Comprender</b><span>Leer sistemas complejos antes de intervenirlos.</span></div><div class="about-node n3"><b>Transformar</b><span>Convertir evidencia en decisiones aplicables.</span></div></div></div></section>
+  <div class="u-ticker"><div class="u-ticker-track"><div class="u-ticker-set"><span class="u-tick">Ciencia aplicada</span><span class="u-tick">Visión interdisciplinaria</span><span class="u-tick">Procesos sostenibles</span><span class="u-tick">Transferencia de conocimiento</span></div><div class="u-ticker-set"><span class="u-tick">Ciencia aplicada</span><span class="u-tick">Visión interdisciplinaria</span><span class="u-tick">Procesos sostenibles</span><span class="u-tick">Transferencia de conocimiento</span></div></div></div>
+  <section class="u-section soft"><div class="u-wrap"><div class="u-head"><div class="u-kicker">Nuestra esencia</div><h2>Una identidad construida sobre tres principios.</h2><p>No se trata solo de investigar: se trata de entender bien el problema, trabajar con método y convertir el conocimiento en valor.</p></div><div class="u-grid3 about-principles"><article class="u-card"><div class="num">01</div><h3>Mirada sistémica</h3><p>Estudiamos procesos como redes conectadas, no como piezas aisladas.</p></article><article class="u-card"><div class="num">02</div><h3>Rigor técnico</h3><p>Modelado, experimentación y análisis sostienen cada decisión científica.</p></article><article class="u-card"><div class="num">03</div><h3>Impacto útil</h3><p>Buscamos resultados que puedan informar, mejorar o transformar sistemas reales.</p></article></div></div></section>
+  <section class="u-section"><div class="u-wrap"><div class="u-head"><div class="u-kicker">Cómo avanzamos</div><h2>De una pregunta compleja a una solución más clara.</h2></div><div class="about-path"><div class="rail"></div><div><div class="about-step"><b>01</b><div><h4>Entender el reto</h4><p>Caracterizamos el sistema, sus restricciones, sus recursos y sus oportunidades.</p></div></div><div class="about-step"><b>02</b><div><h4>Diseñar la estrategia</h4><p>Seleccionamos herramientas, hipótesis y criterios de evaluación.</p></div></div><div class="about-step"><b>03</b><div><h4>Validar con evidencia</h4><p>Contrastamos modelos, datos y resultados antes de avanzar.</p></div></div><div class="about-step"><b>04</b><div><h4>Transferir conocimiento</h4><p>Traducimos lo aprendido en publicaciones, proyectos y oportunidades de colaboración.</p></div></div></div></div></div></section>
+  <footer class="u-footer"><div class="u-wrap"><div class="u-footer-grid"><div><div class="u-kicker" style="color:#8de3c1">Identidad CEPIMA</div><h3>Comprender mejor para transformar mejor.</h3><p>La fortaleza del grupo está en integrar disciplinas, método y visión de largo plazo para abordar retos de procesos y sostenibilidad.</p></div><div class="u-footer-links"><a class="u-footer-link" href="#research-page">Explorar investigación →</a><a class="u-footer-link" href="#team-page">Conocer el equipo →</a><a class="u-footer-link" href="mailto:cepima@upc.edu">Contactar CEPIMA →</a><a class="u-footer-link" href="#projects-page">Ver proyectos →</a></div></div><div class="u-footer-bottom"><span>CEPIMA · Universitat Politècnica de Catalunya</span><span>Sobre nosotros · 2026</span></div></div></footer>
+</section>
+
+<section class="cp-page" id="research-page" data-page="research" aria-label="Investigación CEPIMA">
+  <div class="u-top"><button class="cp-back u-back" type="button">← Volver</button></div>
+  <section class="research-hero"><div class="u-wrap research-layout"><div><div class="u-kicker">02 · Investigación</div><h1 class="u-title">Un laboratorio de ideas para <span style="color:#55ddff">sistemas complejos</span>.</h1><p class="u-lead">Procesos, agua, gases y valorización de residuos se integran aquí bajo una misma lógica: comprender, modelar, experimentar y optimizar.</p><div class="u-chiprow"><span class="u-chip">Modelado</span><span class="u-chip">Aguas</span><span class="u-chip">Gases</span><span class="u-chip">Circularidad</span></div></div><div class="research-console"><div class="scan-grid"></div><div class="scanner"></div><div class="research-cell c1"><div class="rc-label">Modelado de procesos</div><div class="pulse-graph"></div></div><div class="research-cell c2"><div class="rc-label">Estructuras moleculares</div><div class="molecule"><i></i><i></i><i></i></div></div><div class="research-cell c3"><div class="rc-label">Análisis de desempeño</div><div class="pulse-graph"></div></div><div class="research-cell c4"><div class="rc-label">Circularidad</div><div class="molecule"><i></i><i></i><i></i></div></div></div></div></section>
+  <div class="u-ticker"><div class="u-ticker-track"><div class="u-ticker-set"><span class="u-tick">Sistemas de procesos</span><span class="u-tick">Tratamiento de aguas</span><span class="u-tick">Captura de gases</span><span class="u-tick">Simbiosis industrial</span></div><div class="u-ticker-set"><span class="u-tick">Sistemas de procesos</span><span class="u-tick">Tratamiento de aguas</span><span class="u-tick">Captura de gases</span><span class="u-tick">Simbiosis industrial</span></div></div></div>
+  <section class="u-section soft"><div class="u-wrap"><div class="u-head"><div class="u-kicker">Líneas de trabajo</div><h2>Cuatro áreas con metodologías y retos propios.</h2><p>La investigación se organiza para que cada línea tenga una identidad técnica clara sin perder la conexión con las demás.</p></div><div class="u-grid2 research-lines"><article class="u-card"><div class="num">01</div><h3>Ingeniería de sistemas de procesos</h3><p>Modelado, simulación, optimización, integración y apoyo a la toma de decisiones.</p></article><article class="u-card"><div class="num">02</div><h3>Tratamiento y recuperación en aguas</h3><p>Fotocatálisis, ozonización, Fenton, membranas y recuperación de recursos.</p></article><article class="u-card"><div class="num">03</div><h3>Captura y separación de gases</h3><p>CO₂ y gases fluorados mediante materiales porosos, adsorción y tecnologías selectivas.</p></article><article class="u-card"><div class="num">04</div><h3>Valorización y simbiosis industrial</h3><p>Conversión de corrientes residuales en recursos dentro de esquemas circulares.</p></article></div></div></section>
+  <section class="u-section"><div class="u-wrap"><div class="u-head"><div class="u-kicker">Método científico</div><h2>La tecnología cambia, la lógica de validación no.</h2><p>Cada proyecto pasa por una secuencia de planteamiento, medición, análisis, contraste y optimización.</p></div><div class="u-grid4"><article class="u-card"><div class="num">A</div><h3>Hipótesis</h3><p>Definir qué queremos comprender o mejorar.</p></article><article class="u-card"><div class="num">B</div><h3>Experimentar</h3><p>Generar evidencia bajo condiciones controladas.</p></article><article class="u-card"><div class="num">C</div><h3>Modelar</h3><p>Representar el sistema y explorar escenarios.</p></article><article class="u-card"><div class="num">D</div><h3>Optimizar</h3><p>Identificar configuraciones de mejor desempeño.</p></article></div></div></section>
+  <footer class="u-footer"><div class="u-wrap"><div class="u-footer-grid"><div><div class="u-kicker" style="color:#69ddff">Research Lab</div><h3>Preguntas difíciles. Métodos rigurosos. Resultados útiles.</h3><p>La investigación de CEPIMA articula herramientas experimentales y computacionales para avanzar desde la comprensión hasta la aplicación.</p></div><div class="u-footer-links"><a class="u-footer-link" href="#projects-page">Ver proyectos →</a><a class="u-footer-link" href="#publications-page">Ver publicaciones →</a><a class="u-footer-link" href="mailto:cepima@upc.edu">Proponer colaboración →</a><a class="u-footer-link" href="#about-page">Cómo trabajamos →</a></div></div><div class="u-footer-bottom"><span>CEPIMA Research · Procesos + Ambiente</span><span>Investigación · 2026</span></div></div></footer>
+</section>
+
+<section class="cp-page" id="projects-page" data-page="projects" aria-label="Proyectos e impacto CEPIMA">
+  <div class="u-top"><button class="cp-back u-back" type="button">← Volver</button></div>
+  <section class="projects-hero"><div class="u-wrap projects-layout"><div><div class="u-kicker">03 · Proyectos e impacto</div><h1 class="u-title">Ideas que salen del laboratorio y buscan <span style="color:#15936c">valor real</span>.</h1><p class="u-lead">Los proyectos conectan líneas de investigación, herramientas de modelado y tecnologías ambientales con retos concretos de circularidad, emisiones y recuperación de recursos.</p><div class="u-chiprow"><span class="u-chip">P2CE</span><span class="u-chip">CO₂</span><span class="u-chip">Gases</span><span class="u-chip">Agua</span></div></div><div class="project-board"><div class="project-ticket t1"><div class="bar"></div><strong>P2CE</strong><span>Modelado, integración y optimización para impulsar circularidad industrial.</span></div><div class="project-ticket t2"><div class="bar"></div><strong>Captura de CO₂</strong><span>Adsorción, absorción, simulación y evaluación de rutas de reutilización.</span></div><div class="project-ticket t3"><div class="bar"></div><strong>Agua + recursos</strong><span>Tratamiento avanzado y recuperación de agua, nutrientes y materiales valiosos.</span></div></div></div></section>
+  <div class="u-ticker"><div class="u-ticker-track"><div class="u-ticker-set"><span class="u-tick">Del laboratorio a la industria</span><span class="u-tick">Circularidad</span><span class="u-tick">Reducción de emisiones</span><span class="u-tick">Recuperación de recursos</span></div><div class="u-ticker-set"><span class="u-tick">Del laboratorio a la industria</span><span class="u-tick">Circularidad</span><span class="u-tick">Reducción de emisiones</span><span class="u-tick">Recuperación de recursos</span></div></div></div>
+  <section class="u-section soft"><div class="u-wrap"><div class="u-head"><div class="u-kicker">Portafolio</div><h2>Proyectos con problemas, tecnologías y rutas de impacto distintas.</h2><p>Cada proyecto puede combinar varias capacidades del grupo, pero todos buscan llegar a un resultado que pueda ser entendido, evaluado y eventualmente transferido.</p></div><div class="u-grid2"><article class="u-card"><div class="num">P2CE</div><h3>Powering Circular Economy</h3><p>Herramientas de integración y optimización para escenarios de economía circular.</p></article><article class="u-card"><div class="num">CO₂</div><h3>Captura y reutilización</h3><p>Evaluación de tecnologías selectivas y alternativas de aprovechamiento.</p></article><article class="u-card"><div class="num">GAS</div><h3>Separación y recuperación</h3><p>Procesos y materiales avanzados para gases de alto impacto climático.</p></article><article class="u-card"><div class="num">H₂O</div><h3>Tratamiento y recuperación</h3><p>Eliminación de contaminantes y recuperación de recursos en corrientes acuosas.</p></article></div></div></section>
+  <section class="u-section"><div class="u-wrap project-impact"><div class="impact-big"><div class="u-kicker" style="color:#83ddbf">Impacto</div><h3>Tres dimensiones de valor.</h3><p>Un proyecto puede aportar nuevo conocimiento, reducir impactos ambientales y crear mejores herramientas para decisiones industriales. El verdadero valor aparece cuando estas dimensiones se encuentran.</p></div><div class="impact-stack"><article class="u-card"><div class="num">01</div><h3>Científico</h3><p>Conocimiento, validaciones, métodos y publicaciones.</p></article><article class="u-card"><div class="num">02</div><h3>Ambiental</h3><p>Menos emisiones, más recuperación y mejor uso de recursos.</p></article><article class="u-card"><div class="num">03</div><h3>Industrial</h3><p>Herramientas con potencial de implementación y escalado.</p></article></div></div></section>
+  <footer class="u-footer"><div class="u-wrap"><div class="u-footer-grid"><div><div class="u-kicker" style="color:#8ce4bd">Impacto aplicado</div><h3>Una idea vale más cuando encuentra dónde transformar.</h3><p>CEPIMA busca que cada proyecto construya un puente entre investigación, sostenibilidad y oportunidades de aplicación.</p></div><div class="u-footer-links"><a class="u-footer-link" href="#research-page">Ver investigación →</a><a class="u-footer-link" href="mailto:cepima@upc.edu">Explorar colaboración →</a><a class="u-footer-link" href="#publications-page">Resultados publicados →</a><a class="u-footer-link" href="#team-page">Equipo detrás de los proyectos →</a></div></div><div class="u-footer-bottom"><span>CEPIMA · Proyectos e impacto</span><span>Aplicación · Circularidad · Transferencia</span></div></div></footer>
+</section>
+
+<section class="cp-page" id="publications-page" data-page="publications" aria-label="Publicaciones CEPIMA">
+  <div class="u-top"><button class="cp-back u-back" type="button">← Volver</button></div>
+  <section class="pub-hero"><div class="u-wrap pub-layout"><div><div class="u-kicker">04 · Publicaciones</div><h1 class="u-title">Conocimiento que queda, circula y <span style="color:#4059bd">se puede ampliar</span>.</h1><p class="u-lead">Las publicaciones son la memoria científica del trabajo de CEPIMA: documentan métodos, resultados, aprendizajes y nuevas preguntas para la comunidad investigadora.</p><div class="u-chiprow"><span class="u-chip">Artículos</span><span class="u-chip">Tesis</span><span class="u-chip">Resultados</span><span class="u-chip">Difusión</span></div></div><div class="pub-library"><div class="pub-glow"></div><div class="pub-sheet s1"><div class="journal">Process systems</div><h4>Modelado y optimización de procesos complejos</h4><div class="line"></div><div class="line w80"></div><div class="line w65"></div><div class="cite">Citar conocimiento</div></div><div class="pub-sheet s2"><div class="journal">Environmental engineering</div><h4>Recuperación de recursos y tratamiento avanzado</h4><div class="line"></div><div class="line w65"></div><div class="line w80"></div><div class="cite">Compartir resultados</div></div><div class="pub-sheet s3"><div class="journal">CEPIMA · Research</div><h4>Publicar también es construir continuidad científica</h4><div class="line"></div><div class="line w80"></div><div class="line"></div><div class="line w65"></div><div class="cite">Abrir nuevas preguntas</div></div></div></div></section>
+  <div class="u-ticker"><div class="u-ticker-track"><div class="u-ticker-set"><span class="u-tick">Producción científica</span><span class="u-tick">Artículos y resultados</span><span class="u-tick">Formación y tesis</span><span class="u-tick">Conocimiento compartido</span></div><div class="u-ticker-set"><span class="u-tick">Producción científica</span><span class="u-tick">Artículos y resultados</span><span class="u-tick">Formación y tesis</span><span class="u-tick">Conocimiento compartido</span></div></div></div>
+  <section class="u-section soft"><div class="u-wrap"><div class="u-head"><div class="u-kicker">Trayectoria</div><h2>La evidencia científica también cuenta una historia.</h2><p>Cada publicación registra un avance, una metodología o un resultado que otros pueden revisar, citar, contrastar y desarrollar.</p></div><div class="pub-metrics"><div class="pub-metric"><strong>+220</strong><span>Publicaciones mostradas en la página de equipo.</span></div><div class="pub-metric"><strong>~26</strong><span>Índice h (Scopus) mostrado en el sitio.</span></div><div class="pub-metric"><strong>+3</strong><span>Tesis doctorales en 10 años mostradas en el sitio.</span></div></div></div></section>
+  <section class="u-section"><div class="u-wrap"><div class="u-head"><div class="u-kicker">Del resultado al registro</div><h2>Publicar es transformar evidencia en memoria científica.</h2></div><div class="u-grid4"><article class="u-card"><div class="num">01</div><h3>Obtener</h3><p>Datos, mediciones, simulaciones y resultados.</p></article><article class="u-card"><div class="num">02</div><h3>Interpretar</h3><p>Construir conclusiones sólidas y contrastables.</p></article><article class="u-card"><div class="num">03</div><h3>Comunicar</h3><p>Estructurar la evidencia para su difusión científica.</p></article><article class="u-card"><div class="num">04</div><h3>Proyectar</h3><p>Abrir nuevas preguntas, citas y colaboraciones.</p></article></div></div></section>
+  <footer class="u-footer"><div class="u-wrap"><div class="u-footer-grid"><div><div class="u-kicker" style="color:#aeb8ff">Memoria científica</div><h3>Lo que se publica puede ser revisado, usado y ampliado.</h3><p>Las publicaciones conectan el trabajo del grupo con la comunidad científica y convierten resultados individuales en una trayectoria acumulativa.</p></div><div class="u-footer-links"><a class="u-footer-link" href="#research-page">Origen: investigación →</a><a class="u-footer-link" href="#projects-page">Aplicación: proyectos →</a><a class="u-footer-link" href="mailto:cepima@upc.edu">Solicitar información →</a><a class="u-footer-link" href="#team-page">Autores y equipo →</a></div></div><div class="u-footer-bottom"><span>CEPIMA · Producción científica</span><span>Publicaciones · Tesis · Resultados</span></div></div></footer>
+</section>
+
 <section class="team-page" id="team-page" aria-label="Equipo CEPIMA">
   <div class="team-page-topbar">
     <button class="team-back" id="teamBackBtn" type="button">← Volver</button>
   </div>
 
+  <div class="team-announcement" aria-label="Mensajes sobre el equipo CEPIMA">
+    <div class="team-ann-track">
+      <div class="team-ann-set">
+        <span class="team-ann-item"><i>✦</i>Aquí encontrarás al equipo que hace posible CEPIMA</span>
+        <span class="team-ann-item"><i>◉</i>Talento multidisciplinario con un mismo propósito</span>
+        <span class="team-ann-item"><i>↗</i>Ciencia, ingeniería y experiencia trabajando en conjunto</span>
+        <span class="team-ann-item"><i>∞</i>Personas que convierten conocimiento en impacto real</span>
+        <span class="team-ann-item"><i>+</i>Conoce a quienes impulsan nuestras soluciones sostenibles</span>
+      </div>
+      <div class="team-ann-set" aria-hidden="true">
+        <span class="team-ann-item"><i>✦</i>Aquí encontrarás al equipo que hace posible CEPIMA</span>
+        <span class="team-ann-item"><i>◉</i>Talento multidisciplinario con un mismo propósito</span>
+        <span class="team-ann-item"><i>↗</i>Ciencia, ingeniería y experiencia trabajando en conjunto</span>
+        <span class="team-ann-item"><i>∞</i>Personas que convierten conocimiento en impacto real</span>
+        <span class="team-ann-item"><i>+</i>Conoce a quienes impulsan nuestras soluciones sostenibles</span>
+      </div>
+    </div>
+  </div>
+
   <section class="team-hero">
-    <img src="assets/cepima-image-5.png" alt="Equipo CEPIMA" class="team-hero-image">
+    <img src="assets/img_004.png" alt="Equipo CEPIMA" class="team-hero-image">
   </section>
 
   
 
 <section class="team-long-section" id="equipo-completo">
   <div class="team-long-stage" id="teamLongStage">
-    <img class="team-long-base" src="assets/cepima-image-6.png" alt="Equipo CEPIMA completo">
+    <img class="team-long-base" src="assets/img_003.png" alt="Equipo CEPIMA completo">
 
     <div class="team-zone zone-prof" data-zone="prof">
       <div class="zone-clone"></div>
@@ -1876,6 +2537,54 @@ if(!reduced) requestAnimationFrame(moveDots);
     </div>
   </div>
 </section>
+
+
+  <section class="team-vision-2026" aria-label="Propósito y visión del equipo CEPIMA">
+    <div class="team-vision-inner">
+      <div class="team-vision-kicker">Un equipo · un propósito</div>
+      <div class="team-vision-head">
+        <h2>Personas capacitadas para convertir <span>conocimiento en impacto.</span></h2>
+        <p>
+          En CEPIMA reunimos perfiles científicos, técnicos y académicos que trabajan con una misma dirección:
+          desarrollar soluciones rigurosas, transferibles y sostenibles. Cada integrante aporta experiencia,
+          criterio y una visión colaborativa para hacer avanzar los proyectos desde la investigación hasta su aplicación real.
+        </p>
+      </div>
+
+      <div class="team-vision-stage" id="teamVisionStage">
+        <article class="team-vision-card">
+          <span class="vision-number">01 · RIGOR</span>
+          <div class="vision-icon">⌁</div>
+          <h3>Excelencia científica</h3>
+          <p>Trabajamos con método, evidencia y profundidad técnica para que cada decisión esté respaldada por conocimiento sólido.</p>
+        </article>
+        <article class="team-vision-card">
+          <span class="vision-number">02 · EQUIPO</span>
+          <div class="vision-icon">◎</div>
+          <h3>Talento multidisciplinario</h3>
+          <p>Ingeniería, investigación y experiencia convergen para abordar problemas complejos desde perspectivas complementarias.</p>
+        </article>
+        <article class="team-vision-card">
+          <span class="vision-number">03 · TRANSFERENCIA</span>
+          <div class="vision-icon">↗</div>
+          <h3>Del conocimiento a la acción</h3>
+          <p>Buscamos que los resultados no se queden en el laboratorio: los orientamos hacia aplicaciones, industria y transformación real.</p>
+        </article>
+        <article class="team-vision-card">
+          <span class="vision-number">04 · FUTURO</span>
+          <div class="vision-icon">✦</div>
+          <h3>Sostenibilidad con propósito</h3>
+          <p>Impulsamos proyectos capaces de generar valor ambiental, tecnológico y social con una mirada de largo plazo.</p>
+        </article>
+      </div>
+
+      <div class="team-vision-footer">
+        <strong>Más que perfiles individuales: una red de conocimiento trabajando por un futuro más sostenible.</strong>
+        <span>CEPIMA · Ciencia · Ingeniería · Impacto</span>
+      </div>
+    </div>
+  </section>
+
 
 
 
@@ -2099,7 +2808,25 @@ if(!reduced) requestAnimationFrame(moveDots);
 })();
 </script>
 
-\n<script>\n(function(){\n  const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;\n  if(!fine) return;\n  document.querySelectorAll('.team-zone').forEach((zone,idx)=>{\n    const clone=zone.querySelector('.zone-clone');\n    zone.addEventListener('pointermove',e=>{\n      const r=zone.getBoundingClientRect();\n      const x=(e.clientX-r.left)/r.width-.5;\n      const y=(e.clientY-r.top)/r.height-.5;\n      const dx=x*(6+idx*1.2);\n      const dy=y*(4+idx*.8);\n      clone.style.transform=`translate3d(${dx}px,${dy}px,18px) rotateX(${-y*1.8}deg) rotateY(${x*2.2}deg)`;\n    });\n    zone.addEventListener('pointerleave',()=>{clone.style.transform='';});\n  });\n})();\n</script>\n
+<script>
+(function(){
+  const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(!fine) return;
+  document.querySelectorAll('.team-zone').forEach((zone,idx)=>{
+    const clone=zone.querySelector('.zone-clone');
+    zone.addEventListener('pointermove',e=>{
+      const r=zone.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      const dx=x*(6+idx*1.2);
+      const dy=y*(4+idx*.8);
+      clone.style.transform=`translate3d(${dx}px,${dy}px,18px) rotateX(${-y*1.8}deg) rotateY(${x*2.2}deg)`;
+    });
+    zone.addEventListener('pointerleave',()=>{clone.style.transform='';});
+  });
+})();
+</script>
+
 
 <script>
 /* =========================================================
@@ -2165,6 +2892,122 @@ if(!reduced) requestAnimationFrame(moveDots);
       showHome();
     }
   });
+})();
+</script>
+
+
+<script>
+(function(){
+  const cards=[...document.querySelectorAll('.team-vision-card')];
+  const fine=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(!fine) return;
+  cards.forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      card.style.setProperty('--ry',(x*12).toFixed(2)+'deg');
+      card.style.setProperty('--rx',(-y*10).toFixed(2)+'deg');
+    });
+    card.addEventListener('pointerleave',()=>{
+      card.style.setProperty('--ry','0deg');
+      card.style.setProperty('--rx','0deg');
+    });
+  });
+})();
+</script>
+
+
+<script>
+/* =========================================================
+   NAVEGACION A PAGINAS INDEPENDIENTES ADICIONALES
+   No modifica la logica existente de Home o Equipo.
+   ========================================================= */
+(function(){
+  const pages = {
+    'sobre nosotros':'about-page',
+    'investigación':'research-page',
+    'investigacion':'research-page',
+    'proyectos e impacto':'projects-page',
+    'publicaciones':'publications-page'
+  };
+
+  function allPages(){ return Array.from(document.querySelectorAll('.cp-page')); }
+  function clearCustomPages(){
+    document.body.classList.remove('cp-page-mode');
+    allPages().forEach(p=>p.classList.remove('active'));
+  }
+  function openCustomPage(id, push=true){
+    const page=document.getElementById(id);
+    if(!page) return;
+    document.body.classList.remove('team-mode');
+    const team=document.getElementById('team-page');
+    if(team) team.classList.remove('active');
+    allPages().forEach(p=>p.classList.remove('active'));
+    document.body.classList.add('cp-page-mode');
+    page.classList.add('active');
+    if(push) history.pushState({cpPage:id},'', '#'+id);
+    window.scrollTo(0,0);
+  }
+  function goHome(push=true){
+    clearCustomPages();
+    if(push) history.pushState({},'',location.pathname+location.search);
+    window.scrollTo(0,0);
+  }
+
+  document.addEventListener('click',function(e){
+    const link=e.target.closest('a');
+    if(!link) return;
+    const txt=link.textContent.trim().toLowerCase();
+
+    /* Si desde una pagina nueva se elige Equipo, cerramos solo la pagina nueva
+       y dejamos que la logica original de Equipo haga su trabajo. */
+    if(txt==='equipo'){
+      clearCustomPages();
+      return;
+    }
+
+    if(pages[txt]){
+      e.preventDefault();
+      if(typeof toggleMenu==='function') toggleMenu(false);
+      openCustomPage(pages[txt],true);
+    }
+  },true);
+
+  document.querySelectorAll('.cp-back').forEach(btn=>{
+    btn.addEventListener('click',()=>goHome(true));
+  });
+
+  window.addEventListener('popstate',function(){
+    const id=location.hash.replace('#','');
+    if(document.getElementById(id)?.classList.contains('cp-page')){
+      openCustomPage(id,false);
+    }else{
+      clearCustomPages();
+    }
+  });
+
+  const initial=location.hash.replace('#','');
+  if(document.getElementById(initial)?.classList.contains('cp-page')){
+    openCustomPage(initial,false);
+  }
+
+  /* Interaccion 3D suave solo dentro de las paginas nuevas. */
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    document.querySelectorAll('.cp-page .cp-scene').forEach(scene=>{
+      scene.addEventListener('pointermove',e=>{
+        const r=scene.getBoundingClientRect();
+        const x=(e.clientX-r.left)/r.width-.5;
+        const y=(e.clientY-r.top)/r.height-.5;
+        scene.querySelectorAll('.cp-core,.cp-ring,.cp-mini-orb').forEach((el,i)=>{
+          el.style.transform=`translate3d(${x*(7+i*2)}px,${y*(5+i)}px,${10+i*4}px) rotateY(${x*3}deg) rotateX(${-y*3}deg)`;
+        });
+      });
+      scene.addEventListener('pointerleave',()=>{
+        scene.querySelectorAll('.cp-core,.cp-ring,.cp-mini-orb').forEach(el=>el.style.transform='');
+      });
+    });
+  }
 })();
 </script>
 
